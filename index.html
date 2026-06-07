@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mundo de Nós Dois</title>
+    <title>FELIZ DIA DOS NAMORADOS</title>
     <style>
         :root { 
             --primary: #6c5ce7; 
@@ -116,7 +116,7 @@
         /* ESTILO DO CRONÔMETRO */
         .timer-display {
             font-family: 'Courier New', Courier, monospace;
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             color: var(--primary);
             font-weight: bold;
             letter-spacing: 0.5px;
@@ -134,7 +134,6 @@
 </head>
 <body>
 
-    <!-- BARRA DE NAVEGAÇÃO -->
     <div class="nav-container">
         <nav class="tabs-nav">
             <a href="index.html" class="tab-link active">Início</a>
@@ -147,13 +146,11 @@
 
     <div class="container">
         
-        <!-- BOAS-VINDAS -->
         <div class="welcome-box">
             <h1>Nosso Servidor Privado</h1>
             <p>O cantinho especial feito para o melhor namorado do mundo.</p>
         </div>
 
-        <!-- PAINEL DE STATUS INTERATIVO -->
         <div class="status-panel">
             <div class="panel-header">
                 <span>CONNECTION STATUS</span>
@@ -162,13 +159,11 @@
             
             <div class="status-grid">
                 
-                <!-- LOCALIZAÇÃO -->
                 <div class="status-item">
                     <div class="status-label">Servidor Local</div>
                     <div class="status-value">Belo Horizonte ⇆ Salvador</div>
                 </div>
 
-                <!-- LINK STATUS -->
                 <div class="status-item">
                     <div class="status-label">Status do Link</div>
                     <div class="status-value">
@@ -176,23 +171,20 @@
                     </div>
                 </div>
 
-                <!-- PLAYTIME 1: DESDE QUE SE CONHECERAM -->
                 <div class="status-item" style="grid-column: 1 / -1;">
                     <div class="status-label">Tempo de Jogo (Desde que nos conhecemos)</div>
                     <div class="status-value timer-display" id="tempoConhecemos">
-                        0000 dias
+                        000 dias (0 anos, 0 meses, 0 dias)
                     </div>
                 </div>
 
-                <!-- PLAYTIME 2: TEMPO DE NAMORO -->
                 <div class="status-item" style="grid-column: 1 / -1;">
                     <div class="status-label">Tempo de Campanha (Tempo de Namoro)</div>
                     <div class="status-value timer-display" id="tempoNamoro" style="color: #e74c3c;">
-                        0000 dias
+                        000 dias (0 anos, 0 meses, 0 dias)
                     </div>
                 </div>
 
-                <!-- META ATUAL -->
                 <div class="status-item" style="grid-column: 1 / -1;">
                     <div class="status-label">Meta Atual do Jogo</div>
                     <div class="status-value" style="color: #d35400;">
@@ -200,7 +192,6 @@
                     </div>
                 </div>
 
-                <!-- MASCOTES -->
                 <div class="status-item" style="grid-column: 1 / -1;">
                     <div class="status-label">Mascotes Autorizados do Servidor</div>
                     <div class="status-value">
@@ -211,39 +202,60 @@
             </div>
         </div>
 
-        <!-- TEXTO DE DIRECIONAMENTO -->
         <p class="intro-phrase">
             Use as abas do menu superior para navegar pelas nossas fotos, ver os seus sorrisos mais bonitos, checar a Pokédex oficial dos nossos times regionais ou abrir as cartas exclusivas que deixei guardadas para você.
         </p>
 
     </div>
 
-    <!-- CÁLCULO E ATUALIZAÇÃO DOS CRONÔMETROS -->
     <script>
-        // Datas configuradas com fuso zerado para o cálculo exato de dias corridos
         const conhecemosData = new Date(2024, 1, 2); // 02 de Fevereiro de 2024
         const namoroData = new Date(2025, 11, 4);   // 04 de Dezembro de 2025
 
-        function calcularDias(dataAlvo) {
+        function obterDiferencaDetalhada(dataAlvo) {
             const agora = new Date();
             
-            // Força o cálculo focado apenas na diferença de datas absolutas (ignorando fuso horário de horário de verão)
+            // Cálculo absoluto de dias totais
             const utcAgora = Date.UTC(agora.getFullYear(), agora.getMonth(), agora.getDate());
             const utcalvo = Date.UTC(dataAlvo.getFullYear(), dataAlvo.getMonth(), dataAlvo.getDate());
-            
-            const diferencaMilissegundos = utcAgora - utcalvo;
-            return Math.floor(diferencaMilissegundos / (1000 * 60 * 60 * 24));
+            const diasTotais = Math.floor((utcAgora - utcalvo) / (1000 * 60 * 60 * 24));
+
+            // Quebra detalhada em Anos, Meses e Dias relativos
+            let anos = agora.getFullYear() - dataAlvo.getFullYear();
+            let meses = agora.getMonth() - dataAlvo.getMonth();
+            let dias = agora.getDate() - dataAlvo.getDate();
+
+            if (dias < 0) {
+                meses--;
+                // Pega o último dia do mês anterior
+                const ultimoDiaMesAnterior = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
+                dias += ultimoDiaMesAnterior;
+            }
+
+            if (meses < 0) {
+                anos--;
+                meses += 12;
+            }
+
+            return {
+                totais: diasTotais,
+                anos: anos,
+                meses: meses,
+                dias: dias
+            };
         }
 
         function atualizarPainel() {
-            const diasConhecemos = calcularDias(conhecemosData);
-            const diasNamoro = calcularDias(namoroData);
+            const c = obterDiferencaDetalhada(conhecemosData);
+            const n = obterDiferencaDetalhada(namoroData);
 
-            document.getElementById("tempoConhecemos").innerHTML = `✨ ${diasConhecemos} dias`;
-            document.getElementById("tempoNamoro").innerHTML = `❤️ ${diasNamoro} dias`;
+            document.getElementById("tempoConhecemos").innerHTML = 
+                `✨ ${c.totais} dias (${c.anos} anos, ${c.meses} meses e ${c.dias} dias)`;
+                
+            document.getElementById("tempoNamoro").innerHTML = 
+                `❤️ ${n.totais} dias (${n.anos} anos, ${n.meses} meses e ${n.dias} dias)`;
         }
 
-        // Inicializa o contador na tela
         atualizarPainel();
     </script>
 
