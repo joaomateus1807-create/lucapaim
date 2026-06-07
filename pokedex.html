@@ -95,25 +95,25 @@
         .slot:hover img { transform: scale(1.15); }
         .poke-name { font-size: 9px; font-weight: bold; text-transform: uppercase; margin-top: 2px; text-align: center; color: #000; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-        /* --- TOOLTIP POP-UP RECONFIGURADO (ABRE PARA BAIXO NAS INSÍGNIAS) --- */
+        /* --- TOOLTIP POP-UP GERAL --- */
         .dex-popup {
-            position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%) scale(0.8);
+            position: absolute; bottom: 110% !important; left: 50% !important; transform: translateX(-50%) scale(0.8) !important;
             width: 160px; background: #2d3436; color: #fff; border: 2px solid #000;
             border-radius: 6px; padding: 8px; box-shadow: 3px 3px 0px rgba(0,0,0,0.3);
-            z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; text-align: left;
+            z-index: 9999 !important; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; text-align: left;
         }
-        .dex-popup::after { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-width: 6px; border-style: solid; border-color: #2d3436 transparent transparent transparent; }
-        .slot:hover .dex-popup { opacity: 1; transform: translateX(-50%) scale(1); pointer-events: auto; }
+        .dex-popup::after { content: ""; position: absolute; top: 100% !important; bottom: auto !important; left: 50%; transform: translateX(-50%); border-width: 6px; border-style: solid; border-color: #2d3436 transparent transparent transparent !important; }
+        .slot:hover .dex-popup { opacity: 1; transform: translateX(-50%) scale(1) !important; pointer-events: auto; }
         
-        /* Ajuste exclusivo do balão para abrir para BAIXO na área de insígnias, evitando as abas */
+        /* AJUSTE EXCLUSIVO PARA O BALÃO IR PARA BAIXO (SÓ NAS INSÍGNIAS) */
         .badges-grid .dex-popup {
-            bottom: auto; top: 110%; transform: translateX(-50%) scale(0.8);
+            bottom: auto !important; top: 110% !important; transform: translateX(-50%) scale(0.8) !important;
         }
         .badges-grid .dex-popup::after {
-            top: auto; bottom: 100%; border-color: transparent transparent #2d3436 transparent;
+            top: auto !important; bottom: 100% !important; border-color: transparent transparent #2d3436 transparent !important;
         }
         .badges-grid .slot:hover .dex-popup {
-            transform: translateX(-50%) scale(1);
+            transform: translateX(-50%) scale(1) !important;
         }
 
         .dex-popup-title { font-size: 9px; font-weight: bold; color: var(--poke-red); text-transform: uppercase; margin-bottom: 3px; border-bottom: 1px dashed #fff; padding-bottom: 2px;}
@@ -359,12 +359,36 @@
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
                 <h3>Unova (COMING SOON)</h3>
                 <div class="pokemon-slots">
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/497.png" alt="Serperior"><div class="poke-name">Serperior</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/581.png" alt="Swanna"><div class="poke-name">Swanna</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/609.png" alt="Chandelure"><div class="poke-name">Chandelure</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/530.png" alt="Excadrill"><div class="poke-name">Excadrill</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/573.png" alt="Cinccino"><div class="poke-name">Cinccino</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/620.png" alt="Mienshao"><div class="poke-name">Mienshao</div></div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Serperior</div><div class="dex-popup-desc">TIPO: Planta<br>INFO: Serpente majestosa que intimida os rivais com o olhar.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/497.png" alt="Serperior">
+                        <div class="poke-name">Serperior</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Swanna</div><div class="dex-popup-desc">TIPO: Água/Voador<br>INFO: Cisne elegante que ataca com batidas de asas velozes.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/581.png" alt="Swanna">
+                        <div class="poke-name">Swanna</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Chandelure</div><div class="dex-popup-desc">TIPO: Fantasma/Fogo<br>INFO: Chamas hipnóticas que queimam o espírito dos adversários.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/609.png" alt="Chandelure">
+                        <div class="poke-name">Chandelure</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Excadrill</div><div class="dex-popup-desc">TIPO: Terra/Aço<br>INFO: Brocas de aço potentes capazes de perfurar túneis profundos.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/530.png" alt="Excadrill">
+                        <div class="poke-name">Excadrill</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Cinccino</div><div class="dex-popup-desc">TIPO: Normal<br>INFO: Pelos macios e sedosos que evitam qualquer tipo de poeira.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/573.png" alt="Cinccino">
+                        <div class="poke-name">Cinccino</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Mienshao</div><div class="dex-popup-desc">TIPO: Lutador<br>INFO: Chicoteia os braços numa velocidade assustadora em combate.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/620.png" alt="Mienshao">
+                        <div class="poke-name">Mienshao</div>
+                    </div>
                 </div>
             </div>
         </div>
