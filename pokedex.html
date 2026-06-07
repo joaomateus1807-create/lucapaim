@@ -16,7 +16,7 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Courier New', Courier, monospace; }
         
-        /* WALLPAPER CUSTOMIZADO: GIRAFA, POKEBOLA E MASTER BALL REPETIDOS */
+        /* WALLPAPER CUSTOMIZADO */
         body { 
             background-color: #f1f2f6; 
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='60' viewBox='0 0 240 60'%3E%3Ctext x='10' y='35' style='font-size:16px; opacity:0.12;'%3E🦒%3C/text%3E%3Ctext x='40' y='35' style='font-size:14px; opacity:0.12;'%3E🔴%3C/text%3E%3Ctext x='70' y='35' style='font-size:16px; opacity:0.12;'%3E🦒%3C/text%3E%3Ctext x='100' y='35' style='font-size:14px; opacity:0.12;'%3E🔴%3C/text%3E%3Ctext x='130' y='35' style='font-size:16px; opacity:0.12;'%3E🦒%3C/text%3E%3Ctext x='160' y='35' style='font-size:14px; opacity:0.12;'%3E🔴%3C/text%3E%3Ctext x='195' y='35' style='font-size:15px; opacity:0.15;'%3E🟣%3C/text%3E%3C/svg%3E");
@@ -54,8 +54,8 @@
             position: relative; display: flex; flex-direction: column; align-items: center;
         }
 
-        .pin-girafa { position: absolute; top: -10px; left: -10px; font-size: 24px; transform: rotate(-15deg); }
-        .pin-pokebola { position: absolute; bottom: -10px; right: -10px; font-size: 20px; }
+        .pin-girafa { position: absolute; top: -10px; left: -10px; font-size: 24px; transform: rotate(-15deg); user-select: none; }
+        .pin-pokebola { position: absolute; bottom: -10px; right: -10px; font-size: 20px; user-select: none; }
 
         .team-box h3 {
             font-size: 1.4rem; text-transform: uppercase; margin-bottom: 20px;
@@ -67,6 +67,7 @@
             grid-template-rows: repeat(2, 1fr); gap: 15px; width: 100%;
         }
 
+        /* ESTILO DO COMPONENTE DO SLOT (POSIÇÃO RELATIVA PARA CONTROLAR O POP-UP) */
         .slot {
             background: #fff; border: 3px solid #000; border-radius: 8px;
             height: 95px; display: flex; flex-direction: column;
@@ -81,11 +82,8 @@
         }
 
         .slot img {
-            width: 56px;
-            height: 56px;
-            object-fit: contain;
-            image-rendering: pixelated; /* Mantém o estilo pixel art nítido */
-            transition: transform 0.1s;
+            width: 56px; height: 56px; object-fit: contain;
+            image-rendering: pixelated; transition: transform 0.1s;
         }
 
         .slot:hover img { transform: scale(1.15); }
@@ -95,6 +93,47 @@
             margin-top: 2px; text-align: center; color: #000;
             max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
         }
+
+        /* --- BALÃO DA POKEDEX (POP-UP SOLICITADO NO HOVER) --- */
+        .dex-popup {
+            position: absolute;
+            bottom: 110%; /* Fica em cima do quadrado */
+            left: 50%;
+            transform: translateX(-50%) scale(0.8);
+            width: 160px;
+            background: #2d3436;
+            color: #fff;
+            border: 2px solid #000;
+            border-radius: 6px;
+            padding: 8px;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s, transform 0.2s;
+            text-align: left;
+        }
+
+        /* Setinha apontando para baixo no balão */
+        .dex-popup::after {
+            content: "";
+            position: absolute;
+            top: 100%; left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: #2d3436 transparent transparent transparent;
+        }
+
+        /* Ativa o pop-up quando passa o mouse no slot */
+        .slot:hover .dex-popup {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+            pointer-events: auto;
+        }
+
+        .dex-popup-title { font-size: 9px; font-weight: bold; color: var(--poke-red); text-transform: uppercase; margin-bottom: 3px; border-bottom: 1px dashed #fff; padding-bottom: 2px;}
+        .dex-popup-desc { font-size: 8px; line-height: 1.3; font-family: monospace; }
 
         /* --- SEÇÃO DE MOMENTOS --- */
         .flash-card { 
@@ -143,12 +182,36 @@
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
                 <h3>Kanto</h3>
                 <div class="pokemon-slots">
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/470.png" alt="Leafeon"><div class="poke-name">Leafeon</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/417.png" alt="Pachirisu"><div class="poke-name">Pachirisu</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/475.png" alt="Gallade"><div class="poke-name">Gallade</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/981.png" alt="Farigiraf"><div class="poke-name">Farigiraf</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/6.png" alt="Charizard"><div class="poke-name">Charizard</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/395.png" alt="Empoleon"><div class="poke-name">Empoleon</div></div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Leafeon</div><div class="dex-popup-desc">TIPO: Planta<br>INFO: Evolução do Eevee obtida nas nossas andanças.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/470.png" alt="Leafeon">
+                        <div class="poke-name">Leafeon</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Pachirisu</div><div class="dex-popup-desc">TIPO: Elétrico<br>INFO: O esquilo elétrico mais rápido da nossa box.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/417.png" alt="Pachirisu">
+                        <div class="poke-name">Pachirisu</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Gallade</div><div class="dex-popup-desc">TIPO: Psíquico/Lutador<br>INFO: Mestre das espadas que protege nossa base.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/475.png" alt="Gallade">
+                        <div class="poke-name">Gallade</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Farigiraf</div><div class="dex-popup-desc">TIPO: Normal/Psíquico<br>INFO: Uma girafa de duas cabeças, nossa mascote oficial!</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/981.png" alt="Farigiraf">
+                        <div class="poke-name">Farigiraf</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Charizard</div><div class="dex-popup-desc">TIPO: Fogo/Voador<br>INFO: O clássico apelão que bota fogo em qualquer boss.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/6.png" alt="Charizard">
+                        <div class="poke-name">Charizard</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Empoleon</div><div class="dex-popup-desc">TIPO: Água/Aço<br>INFO: O pinguim imperador com defesas de metal brabas.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/395.png" alt="Empoleon">
+                        <div class="poke-name">Empoleon</div>
+                    </div>
                 </div>
             </div>
 
@@ -157,12 +220,36 @@
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
                 <h3>Johto</h3>
                 <div class="pokemon-slots">
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/154.png" alt="Meganium"><div class="poke-name">Meganium</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/157.png" alt="Typhlosion"><div class="poke-name">Typhlosion</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/shiny/196.png" alt="Espeon Shiny"><div class="poke-name">Espeon ✨</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/230.png" alt="Kingdra"><div class="poke-name">Kingdra</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/248.png" alt="Tyranitar"><div class="poke-name">Tyranitar</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/214.png" alt="Heracross"><div class="poke-name">Heracross</div></div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Meganium</div><div class="dex-popup-desc">TIPO: Planta<br>INFO: Monstrinho inicial dócil com uma flor enorme no pescoço.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/154.png" alt="Meganium">
+                        <div class="poke-name">Meganium</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Typhlosion</div><div class="dex-popup-desc">TIPO: Fogo<br>INFO: Explosivo e esquentado, solta rajadas flamejantes pelas costas.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/157.png" alt="Typhlosion">
+                        <div class="poke-name">Typhlosion</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Espeon ✨</div><div class="dex-popup-desc">TIPO: Psíquico<br>INFO: Versão Shiny super rara que brilha em verde alienígena!</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/shiny/196.png" alt="Espeon Shiny">
+                        <div class="poke-name">Espeon ✨</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Kingdra</div><div class="dex-popup-desc">TIPO: Água/Dragão<br>INFO: Dragão dos mares imponente que domina os oceanos.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/230.png" alt="Kingdra">
+                        <div class="poke-name">Kingdra</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Tyranitar</div><div class="dex-popup-desc">TIPO: Pedra/Noturno<br>INFO: Um titã de pedra blindado capaz de quebrar montanhas.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/248.png" alt="Tyranitar">
+                        <div class="poke-name">Tyranitar</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Heracross</div><div class="dex-popup-desc">TIPO: Inseto/Lutador<br>INFO: Besouro forte com chifre gigante que adora mel doce.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/214.png" alt="Heracross">
+                        <div class="poke-name">Heracross</div>
+                    </div>
                 </div>
             </div>
 
@@ -171,12 +258,36 @@
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
                 <h3>Hoenn</h3>
                 <div class="pokemon-slots">
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/254.png" alt="Sceptile"><div class="poke-name">Sceptile</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/330.png" alt="Flygon"><div class="poke-name">Flygon</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/267.png" alt="Beautifly"><div class="poke-name">Beautifly</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/308.png" alt="Medicham"><div class="poke-name">Medicham</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/303.png" alt="Mawile"><div class="poke-name">Mawile</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/319.png" alt="Sharpedo"><div class="poke-name">Sharpedo</div></div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Sceptile</div><div class="dex-popup-desc">TIPO: Planta<br>INFO: Lagarto ágil das florestas com folhas cortantes nos braços.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/254.png" alt="Sceptile">
+                        <div class="poke-name">Sceptile</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Flygon</div><div class="dex-popup-desc">TIPO: Terra/Dragão<br>INFO: Dragão místico das areias que cria tempestades ao voar.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/330.png" alt="Flygon">
+                        <div class="poke-name">Flygon</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Beautifly</div><div class="dex-popup-desc">TIPO: Inseto/Voador<br>INFO: Borboleta colorida linda, mas com ferrão bem agressivo.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/267.png" alt="Beautifly">
+                        <div class="poke-name">Beautifly</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Medicham</div><div class="dex-popup-desc">TIPO: Lutador/Psíquico<br>INFO: Pratica meditação para aumentar seus poderes mentais.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/308.png" alt="Medicham">
+                        <div class="poke-name">Medicham</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Mawile</div><div class="dex-popup-desc">TIPO: Aço/Fada<br>INFO: Parece fofa de frente, mas tem uma bocarra de aço atrás.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/303.png" alt="Mawile">
+                        <div class="poke-name">Mawile</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Sharpedo</div><div class="dex-popup-desc">TIPO: Água/Noturno<br>INFO: Tubarão brutamontes extremamente veloz nos oceanos.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/319.png" alt="Sharpedo">
+                        <div class="poke-name">Sharpedo</div>
+                    </div>
                 </div>
             </div>
 
@@ -185,12 +296,36 @@
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
                 <h3>Sinnoh</h3>
                 <div class="pokemon-slots">
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/392.png" alt="Infernape"><div class="poke-name">Infernape</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/445.png" alt="Garchomp"><div class="poke-name">Garchomp</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/468.png" alt="Togekiss"><div class="poke-name">Togekiss</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/407.png" alt="Roserade"><div class="poke-name">Roserade</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/478.png" alt="Froslass"><div class="poke-name">Froslass</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/419.png" alt="Floatzel"><div class="poke-name">Floatzel</div></div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Infernape</div><div class="dex-popup-desc">TIPO: Fogo/Lutador<br>INFO: Macaco lutador com coroa de chamas reais na cabeça.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/392.png" alt="Infernape">
+                        <div class="poke-name">Infernape</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Garchomp</div><div class="dex-popup-desc">TIPO: Dragão/Terra<br>INFO: Predador dos desertos que voa na velocidade do som.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/445.png" alt="Garchomp">
+                        <div class="poke-name">Garchomp</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Togekiss</div><div class="dex-popup-desc">TIPO: Fada/Voador<br>INFO: Criatura angelical que traz paz e bençãos por onde voa.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/468.png" alt="Togekiss">
+                        <div class="poke-name">Togekiss</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Roserade</div><div class="dex-popup-desc">TIPO: Planta/Veneno<br>INFO: Ataca elegantemente usando buquês de flores venenosas.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/407.png" alt="Roserade">
+                        <div class="poke-name">Roserade</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Froslass</div><div class="dex-popup-desc">TIPO: Gelo/Fantasma<br>INFO: Espírito congelante das neves que flutua como um quimono.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/478.png" alt="Froslass">
+                        <div class="poke-name">Froslass</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Floatzel</div><div class="dex-popup-desc">TIPO: Água<br>INFO: Ariranha nadadora equipada com uma boia natural no pescoço.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/419.png" alt="Floatzel">
+                        <div class="poke-name">Floatzel</div>
+                    </div>
                 </div>
             </div>
 
@@ -199,12 +334,36 @@
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
                 <h3>Unova (COMING SOON)</h3>
                 <div class="pokemon-slots">
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/497.png" alt="Serperior"><div class="poke-name">Serperior</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/581.png" alt="Swanna"><div class="poke-name">Swanna</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/609.png" alt="Chandelure"><div class="poke-name">Chandelure</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/530.png" alt="Excadrill"><div class="poke-name">Excadrill</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/573.png" alt="Cinccino"><div class="poke-name">Cinccino</div></div>
-                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/620.png" alt="Mienshao"><div class="poke-name">Mienshao</div></div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Serperior</div><div class="dex-popup-desc">TIPO: Planta<br>INFO: Serpente real majestosa que intimida com o olhar.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/497.png" alt="Serperior">
+                        <div class="poke-name">Serperior</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Swanna</div><div class="dex-popup-desc">TIPO: Água/Voador<br>INFO: Cisne elegante que bate asas fortes para voar longe.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/581.png" alt="Swanna">
+                        <div class="poke-name">Swanna</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Chandelure</div><div class="dex-popup-desc">TIPO: Fantasma/Fogo<br>INFO: Lustre assombrado que queima as almas com chamas hipnóticas.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/609.png" alt="Chandelure">
+                        <div class="poke-name">Chandelure</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Excadrill</div><div class="dex-popup-desc">TIPO: Terra/Aço<br>INFO: Toupeira de aço blindada que fura túneis subterrâneos.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/530.png" alt="Excadrill">
+                        <div class="poke-name">Excadrill</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Cinccino</div><div class="dex-popup-desc">TIPO: Normal<br>INFO: Chinchila fofinha com pelos macios que repelem sujeira.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/573.png" alt="Cinccino">
+                        <div class="poke-name">Cinccino</div>
+                    </div>
+                    <div class="slot">
+                        <div class="dex-popup"><div class="dex-popup-title">Mienshao</div><div class="dex-popup-desc">TIPO: Lutador<br>INFO: Mestre de artes marciais que ataca rápido usando os braços.</div></div>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/620.png" alt="Mienshao">
+                        <div class="poke-name">Mienshao</div>
+                    </div>
                 </div>
             </div>
 
@@ -214,7 +373,6 @@
         <!-- ================= SEÇÃO DE MOMENTOS (14 SLOTS) ================= -->
         <h2 class="section-divider">Nossos Momentos — 14 Screenshots</h2>
 
-        <!-- Os blocos abaixo buscam as fotos poke1.jpg até poke14.jpg que você vai subir -->
         <div class="flash-card">
             <div class="photo-area"><img src="poke1.jpg" alt="Print 1" class="screenshot"><div class="corner-ball">🔴</div></div>
             <div class="text-area"><h3>Momento #01</h3><p>Edite o texto do print aqui.</p></div>
