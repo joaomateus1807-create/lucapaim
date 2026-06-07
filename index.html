@@ -31,10 +31,10 @@
         .timers-container { display: grid; grid-template-columns: 1fr; gap: 25px; margin-bottom: 30px; }
         @media(min-width: 600px) { .timers-container { grid-template-columns: 1fr 1fr; } }
         
-        .timer-card { background: var(--card-bg); padding: 30px 20px; border-radius: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 2px solid #e1e2ef; transition: 0.3s; }
+        .timer-card { background: var(--card-bg); padding: 35px 20px; border-radius: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 2px solid #e1e2ef; transition: 0.3s; }
         .timer-card:hover { border-color: var(--primary-light); transform: translateY(-2px); }
         .timer-card h3 { font-size: 0.95rem; color: var(--primary); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
-        .timer-display { font-size: 1.25rem; font-weight: bold; color: #2d3436; line-height: 1.6; }
+        .timer-display { font-size: 1.3rem; font-weight: bold; color: #2d3436; line-height: 1.4; }
     </style>
 </head>
 <body>
@@ -72,8 +72,8 @@
 
     <script>
         // DATAS CONFIGURADAS COM OS MESES CORRETOS (Fevereiro = 1, Dezembro = 11)
-        const dataPrimeiroOie = new Date(2024, 1, 2, 12, 0, 0);  // 02/02/2024 às 12:00
-        const dataNamoro      = new Date(2025, 11, 4, 20, 0, 0); // 04/12/2025 às 20:00
+        const dataPrimeiroOie = new Date(2024, 1, 2);  // 02/02/2024
+        const dataNamoro      = new Date(2025, 11, 4); // 04/12/2025
 
         function calcularTempo(dataInicio, elementoId) {
             const agora = new Date();
@@ -87,12 +87,9 @@
             const anos = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365));
             const meses = Math.floor((diferenca % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
             const dias = Math.floor((diferenca % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
-            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
-            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
 
             document.getElementById(elementoId).innerHTML = 
-                `${anos} anos, ${meses} meses, ${dias} dias<br>${horas}h ${minutos}m ${segundos}s`;
+                `${anos} anos, ${meses} meses e ${dias} dias`;
         }
 
         function atualizar() {
@@ -100,10 +97,7 @@
             calcularTempo(dataNamoro, "tempo-namoro");
         }
 
-        // Executa a atualização a cada segundo de forma segura
-        setInterval(atualizar, 1000);
-        
-        // Roda a primeira vez logo após carregar a página
+        // Roda uma única vez de forma limpa assim que a página carrega
         document.addEventListener("DOMContentLoaded", atualizar);
     </script>
 </body>
