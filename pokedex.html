@@ -95,12 +95,13 @@
         .slot:hover img { transform: scale(1.15); }
         .poke-name { font-size: 9px; font-weight: bold; text-transform: uppercase; margin-top: 2px; text-align: center; color: #000; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-        /* --- TOOLTIP POP-UP --- */
+        /* --- TOOLTIP POP-UP CORRIGIDO (Z-INDEX REALINHADO) --- */
         .dex-popup {
             position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%) scale(0.8);
             width: 160px; background: #2d3436; color: #fff; border: 2px solid #000;
             border-radius: 6px; padding: 8px; box-shadow: 3px 3px 0px rgba(0,0,0,0.3);
-            z-index: 10; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; text-align: left;
+            z-index: 9999; /* Garante que fica na frente de abas e pastas */
+            opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; text-align: left;
         }
         .dex-popup::after { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-width: 6px; border-style: solid; border-color: #2d3436 transparent transparent transparent; }
         .slot:hover .dex-popup { opacity: 1; transform: translateX(-50%) scale(1); pointer-events: auto; }
@@ -110,7 +111,6 @@
         /* --- SYSTEMA DE ABAS DE PASTA (INSÍGNIAS) --- */
         .badge-tabs-container { margin-bottom: 50px; position: relative; }
         
-        /* Orelhas da pasta fichário */
         .folder-tabs { display: flex; gap: 4px; padding-left: 10px; }
         .folder-tab {
             background: #b2bec3; color: #000; border: 4px solid #000;
@@ -121,7 +121,6 @@
         }
         .folder-tab.active-folder { background: #dfe6e9; top: 0px; padding-bottom: 12px; z-index: 3; }
 
-        /* Corpo da pasta */
         .badges-box {
             background: #dfe6e9; border: 4px solid #000; border-radius: 0 15px 15px 15px;
             padding: 30px 25px 25px 25px; box-shadow: 6px 6px 0px #000; position: relative; z-index: 2;
@@ -183,7 +182,6 @@
                     </p>
                 </div>
                 <div class="trainer-avatar-side">
-                    <!-- Buscando o arquivo real que você subir depois -->
                     <img src="lucaskin.png" alt="Luca Paim">
                 </div>
             </div>
@@ -364,7 +362,6 @@
         <h2 class="section-divider">Insígnias Conquistadas</h2>
         
         <div class="badge-tabs-container">
-            <!-- Abas Estilo Orelha de Fichário -->
             <div class="folder-tabs">
                 <div class="folder-tab active-folder" onclick="mudarPasta(event, 'kanto-badges')">Kanto</div>
                 <div class="folder-tab" onclick="mudarPasta(event, 'johto-badges')">Johto</div>
@@ -372,7 +369,6 @@
                 <div class="folder-tab" onclick="mudarPasta(event, 'sinnoh-badges')">Sinnoh</div>
             </div>
             
-            <!-- Caixa Principal da Pasta -->
             <div class="badges-box">
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
                 
@@ -438,7 +434,6 @@
         <!-- ================= SEÇÃO DE MOMENTOS (14 SLOTS) ================= -->
         <h2 class="section-divider">Nossos Momentos — 14 Screenshots</h2>
 
-        <!-- Os blocos de prints que você vai preencher depois -->
         <div class="flash-card"><div class="photo-area"><img src="poke1.jpg" alt="Print 1" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Momento #01</h3><p>Edite o texto do print aqui.</p></div></div>
         <div class="flash-card"><div class="photo-area"><img src="poke2.jpg" alt="Print 2" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Momento #02</h3><p>Edite o texto do print aqui.</p></div></div>
         <div class="flash-card"><div class="photo-area"><img src="poke3.jpg" alt="Print 3" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Momento #03</h3><p>Edite o texto do print aqui.</p></div></div>
@@ -456,22 +451,16 @@
 
     </div>
 
-    <!-- LÓGICA DE CLIQUE NAS ABAS DA PASTA -->
     <script>
         function mudarPasta(evt, nomeRegiao) {
-            // Esconde todos os conteudos de insignias
             const conteudos = document.getElementsByClassName("badges-content");
             for (let i = 0; i < conteudos.length; i++) {
                 conteudos[i].classList.remove("active-content");
             }
-
-            // Remove a classe active de todas as abas
             const abas = document.getElementsByClassName("folder-tab");
             for (let i = 0; i < abas.length; i++) {
                 abas[i].classList.remove("active-folder");
             }
-
-            // Mostra o conteudo atual e marca a aba como ativa
             document.getElementById(nomeRegiao).classList.add("active-content");
             evt.currentTarget.classList.add("active-folder");
         }
