@@ -13,7 +13,15 @@
             --text: #2d3436; 
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', -apple-system, sans-serif; }
-        body { background-color: var(--bg); color: var(--text); padding-bottom: 50px; }
+        
+        /* PLANO DE FUNDO ESTILO WALLPAPER DE GIRAFA RETRO */
+        body { 
+            background-color: #f1f2f6; 
+            /* O código abaixo gera o padrão repetido de girafinhas no fundo */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ctext x='15' y='35' style='font-size:16px; opacity: 0.12; font-family:monospace;'%3E🦒%3C/text%3E%3C/svg%3E");
+            color: var(--text); 
+            padding-bottom: 50px; 
+        }
         
         /* MENU DO TOPO */
         .nav-container { max-width: 800px; margin: 20px auto; padding: 0 20px; }
@@ -24,13 +32,13 @@
         /* CONTAINER DOS FLASHES */
         .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
         
-        /* CARD DO ESTILO DA IMAGEM DO USUÁRIO (LADO A LADO) */
+        /* CARDS LADO A LADO */
         .flash-card { 
             display: flex; 
             flex-direction: column; 
             background: var(--card-bg); 
             border-radius: 20px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04); 
+            box-shadow: 0 6px 20px rgba(0,0,0,0.04); 
             margin-bottom: 35px; 
             overflow: hidden;
             border: 2px solid #e1e2ef;
@@ -38,18 +46,15 @@
         
         @media(min-width: 650px) {
             .flash-card { flex-direction: row; }
-            .flash-card:nth-child(even) { flex-direction: row-reverse; } /* Alterna os lados para ficar dinâmico */
+            .flash-card:nth-child(even) { flex-direction: row-reverse; }
         }
 
-        /* MOLDURA DA FOTO COM DETALHE RETRO/PIXEL */
+        /* MOLDURA DA FOTO */
         .photo-area { 
             position: relative;
             flex: 1; 
             min-height: 250px;
             background: #cbd5e1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         
         .photo-area img {
@@ -59,20 +64,20 @@
             display: block;
         }
 
-        /* DETALHE DA GIRAFA EM PIXEL ART (USANDO CARACTERE / DESIGN RETRO) */
+        /* SELO DA GIRAFA SEM TEXTO */
         .girafa-pixel {
             position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: #f1f2f6;
+            bottom: 12px;
+            right: 12px;
+            background: #ffffff;
             border: 2px solid #2d3436;
-            padding: 4px 8px;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 5px;
-            color: #e67e22;
-            font-family: monospace;
+            padding: 6px;
+            font-size: 18px;
+            border-radius: 8px;
             box-shadow: 2px 2px 0px #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* ÁREA DA DESCRIÇÃO */
@@ -86,26 +91,20 @@
         
         .text-area h3 { 
             color: var(--primary); 
-            font-size: 1.4rem; 
-            margin-bottom: 10px; 
+            font-size: 1.35rem; 
+            margin-bottom: 12px; 
             font-weight: 700;
         }
         
         .text-area p { 
             color: #4b5563; 
             line-height: 1.6; 
-            font-size: 1rem; 
-        }
-        
-        .placeholder-text {
-            color: #94a3b8;
-            font-style: italic;
+            font-size: 0.98rem; 
         }
     </style>
 </head>
 <body>
 
-    <!-- BARRA DE NAVEGAÇÃO -->
     <div class="nav-container">
         <nav class="tabs-nav">
             <a href="index.html" class="tab-link">Início</a>
@@ -118,40 +117,113 @@
 
     <div class="container">
         
-        <!-- FOTO FAVORITA 1 -->
         <div class="flash-card">
             <div class="photo-area">
-                <!-- Substitua 'link_da_sua_foto_1.jpg' pelo link ou nome da foto depois -->
-                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500" alt="Nossa Foto">
-                <div class="girafa-pixel">🦒 PIXEL</div>
+                <img src="foto1.jpg" alt="Foto 1">
+                <div class="girafa-pixel">🦒</div>
             </div>
             <div class="text-area">
-                <h3>O Início de Tudo</h3>
+                <h3>Flash #01 — O Início de Tudo</h3>
                 <p>Escreva aqui a descrição detalhada dessa foto favorita. Conte onde vocês estavam, o que aconteceu nesse dia e por que esse momento se tornou tão especial para você.</p>
             </div>
         </div>
 
-        <!-- FOTO FAVORITA 2 -->
         <div class="flash-card">
             <div class="photo-area">
-                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500" alt="Nossa Foto">
-                <div class="girafa-pixel">🦒 PIXEL</div>
+                <img src="foto2.jpg" alt="Foto 2">
+                <div class="girafa-pixel">🦒</div>
             </div>
             <div class="text-area">
-                <h3>Nossa Primeira Viagem</h3>
-                <p>Coloque a história da segunda foto favorita aqui. O layout vai inverter automaticamente o lado da imagem no computador para o design não ficar cansativo.</p>
+                <h3>Flash #02 — Título do Momento</h3>
+                <p>Texto descritivo do segundo momento aqui.</p>
             </div>
         </div>
 
-        <!-- FOTO FAVORITA 3 -->
         <div class="flash-card">
             <div class="photo-area">
-                <img src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=500" alt="Nossa Foto">
-                <div class="girafa-pixel">🦒 PIXEL</div>
+                <img src="foto3.jpg" alt="Foto 3">
+                <div class="girafa-pixel">🦒</div>
             </div>
             <div class="text-area">
-                <h3>Aquele Encontro Especial</h3>
-                <p>História da terceira foto favorita aqui. Você pode replicar essa estrutura de blocos facilmente para colocar as suas 10 fotos preferidas.</p>
+                <h3>Flash #03 — Título do Momento</h3>
+                <p>Texto descritivo do terceiro momento aqui.</p>
+            </div>
+        </div>
+
+        <div class="flash-card">
+            <div class="photo-area">
+                <img src="foto4.jpg" alt="Foto 4">
+                <div class="girafa-pixel">🦒</div>
+            </div>
+            <div class="text-area">
+                <h3>Flash #04 — Título do Momento</h3>
+                <p>Texto descritivo do quarto momento aqui.</p>
+            </div>
+        </div>
+
+        <div class="flash-card">
+            <div class="photo-area">
+                <img src="foto5.jpg" alt="Foto 5">
+                <div class="girafa-pixel">🦒</div>
+            </div>
+            <div class="text-area">
+                <h3>Flash #05 — Título do Momento</h3>
+                <p>Texto descritivo do quinto momento aqui.</p>
+            </div>
+        </div>
+
+        <div class="flash-card">
+            <div class="photo-area">
+                <img src="foto6.jpg" alt="Foto 6">
+                <div class="girafa-pixel">🦒</div>
+            </div>
+            <div class="text-area">
+                <h3>Flash #06 — Título do Momento</h3>
+                <p>Texto descritivo do sexto momento aqui.</p>
+            </div>
+        </div>
+
+        <div class="flash-card">
+            <div class="photo-area">
+                <img src="foto7.jpg" alt="Foto 7">
+                <div class="girafa-pixel">🦒</div>
+            </div>
+            <div class="text-area">
+                <h3>Flash #07 — Título do Momento</h3>
+                <p>Texto descritivo do sétimo momento aqui.</p>
+            </div>
+        </div>
+
+        <div class="flash-card">
+            <div class="photo-area">
+                <img src="foto8.jpg" alt="Foto 8">
+                <div class="girafa-pixel">🦒</div>
+            </div>
+            <div class="text-area">
+                <h3>Flash #08 — Título do Momento</h3>
+                <p>Texto descritivo do oitavo momento aqui.</p>
+            </div>
+        </div>
+
+        <div class="flash-card">
+            <div class="photo-area">
+                <img src="foto9.jpg" alt="Foto 9">
+                <div class="girafa-pixel">🦒</div>
+            </div>
+            <div class="text-area">
+                <h3>Flash #09 — Título do Momento</h3>
+                <p>Texto descritivo do nono momento aqui.</p>
+            </div>
+        </div>
+
+        <div class="flash-card">
+            <div class="photo-area">
+                <img src="foto10.jpg" alt="Foto 10">
+                <div class="girafa-pixel">🦒</div>
+            </div>
+            <div class="text-area">
+                <h3>Flash #10 — Nosso Futuro</h3>
+                <p>Texto descritivo do décimo momento aqui.</p>
             </div>
         </div>
 
