@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorrisos do Luca</title>
+    <style>
+        :root { 
+            --primary: #6c5ce7; 
+            --primary-light: #a29bfe; 
+            --bg: #f8f9fa; 
+            --card-bg: #ffffff; 
+            --text: #2d3436; 
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', -apple-system, sans-serif; }
+        
+        /* PLANO DE FUNDO PADRÃO DO SITE */
+        body { 
+            background-color: #f1f2f6; 
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ctext x='15' y='35' style='font-size:16px; opacity: 0.12;'%3E🦒%3C/text%3E%3C/svg%3E");
+            color: var(--text); 
+            padding-bottom: 50px; 
+        }
+        
+        /* MENU DO TOPO */
+        .nav-container { max-width: 900px; margin: 20px auto; padding: 0 20px; }
+        .tabs-nav { display: flex; justify-content: space-around; background: var(--card-bg); padding: 10px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow-x: auto; }
+        .tab-link { text-decoration: none; padding: 10px 20px; font-weight: bold; color: #636e72; border-radius: 20px; transition: 0.3s; white-space: nowrap; }
+        .tab-link.active { background: var(--primary); color: white; }
+        
+        /* CABEÇALHO */
+        header { text-align: center; padding: 40px 20px; margin-bottom: 20px; }
+        header h1 { font-size: 2rem; color: #2d3436; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* CONTAINER POLAROIDS (GRADE 2 LINHAS X 3 COLUNAS) */
+        .polaroid-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        @media(min-width: 600px) {
+            .polaroid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media(min-width: 900px) {
+            .polaroid-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* DESIGN DA POLAROID */
+        .polaroid {
+            background: #ffffff;
+            padding: 15px 15px 25px 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e4e4e4;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Efeito de inclinação bobo para parecer fotos reais jogadas na mesa */
+        .polaroid:nth-child(odd) { transform: rotate(-2deg); }
+        .polaroid:nth-child(even) { transform: rotate(2deg); }
+
+        .polaroid:hover {
+            transform: scale(1.04) rotate(0deg) !important;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+            z-index: 5;
+        }
+
+        .polaroid-img {
+            width: 100%;
+            aspect-ratio: 1 / 1; /* Força a foto a ficar perfeitamente quadrada */
+            object-fit: cover;
+            background: #dfe6e9;
+            border: 1px solid #dcdde1;
+            margin-bottom: 15px;
+        }
+
+        .polaroid-caption {
+            text-align: center;
+            font-family: 'Comic Sans MS', 'Courier New', cursive, sans-serif; /* Fonte estilo manuscrita */
+            font-size: 1rem;
+            color: #555;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA DE NAVEGAÇÃO -->
+    <div class="nav-container">
+        <nav class="tabs-nav">
+            <a href="index.html" class="tab-link">Início</a>
+            <a href="fotos.html" class="tab-link">Nossos Flashes</a>
+            <a href="sorrisos.html" class="tab-link active">Sorrisos do Luca</a>
+            <a href="pokedex.html" class="tab-link">PokeDex</a>
+            <a href="cartas.html" class="tab-link">Cartas para Você</a>
+        </nav>
+    </div>
+
+    <!-- CABEÇALHO COM O SEU TÍTULO -->
+    <header>
+        <h1>A coisa mais especial sorriso de momo</h1>
+    </header>
+
+    <!-- AS 6 FOTOS POLAROID -->
+    <div class="polaroid-container">
+        
+        <!-- POLAROID 1 -->
+        <div class="polaroid">
+            <!-- Renomeie as fotos para sorriso1.jpg até sorriso6.jpg antes de subir -->
+            <img src="sorriso1.jpg" alt="Sorriso 1" class="polaroid-img">
+            <div class="polaroid-caption">Legenda da Foto 1</div>
+        </div>
+
+        <!-- POLAROID 2 -->
+        <div class="polaroid">
+            <img src="sorriso2.jpg" alt="Sorriso 2" class="polaroid-img">
+            <div class="polaroid-caption">Legenda da Foto 2</div>
+        </div>
+
+        <!-- POLAROID 3 -->
+        <div class="polaroid">
+            <img src="sorriso3.jpg" alt="Sorriso 3" class="polaroid-img">
+            <div class="polaroid-caption">Legenda da Foto 3</div>
+        </div>
+
+        <!-- POLAROID 4 -->
+        <div class="polaroid">
+            <img src="sorriso4.jpg" alt="Sorriso 4" class="polaroid-img">
+            <div class="polaroid-caption">Legenda da Foto 4</div>
+        </div>
+
+        <!-- POLAROID 5 -->
+        <div class="polaroid">
+            <img src="sorriso5.jpg" alt="Sorriso 5" class="polaroid-img">
+            <div class="polaroid-caption">Legenda da Foto 5</div>
+        </div>
+
+        <!-- POLAROID 6 -->
+        <div class="polaroid">
+            <img src="sorriso6.jpg" alt="Sorriso 6" class="polaroid-img">
+            <div class="polaroid-caption">Legenda da Foto 6</div>
+        </div>
+
+    </div>
+
+</body>
+</html>
