@@ -14,7 +14,6 @@
             --poke-red: #ff7675;
             --poke-blue: #74b9ff;
             --trainer-blue: #2980b9;
-            --trainer-card-bg: #3498db;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Courier New', Courier, monospace; }
         
@@ -54,51 +53,14 @@
         }
         .trainer-card-body { display: flex; gap: 15px; }
         .trainer-info-side { flex: 1.3; font-size: 0.95rem; line-height: 1.8; }
-        .trainer-info-side border-line { border-bottom: 2px solid rgba(255,255,255,0.3); margin-bottom: 8px; }
         .trainer-info-side span.label { color: #ffeaa7; font-weight: bold; }
         
-        /* AVATAR DO LUCA PIXELADO EM CSS */
         .trainer-avatar-side { 
             flex: 1; background: #ecf0f1; border: 3px solid #000; 
-            border-radius: 10px; height: 160px; position: relative;
-            display: flex; align-items: center; justify-content: center;
-            overflow: hidden;
+            border-radius: 10px; height: 160px; display: flex; 
+            align-items: center; justify-content: center; overflow: hidden;
         }
-        .pixel-luca {
-            width: 70px; height: 110px; position: relative; margin-top: 25px;
-        }
-        /* Boné Ash/Pokémon */
-        .pixel-luca::before {
-            content: ""; position: absolute; top: -14px; left: 10px;
-            width: 50px; height: 16px; background: #e74c3c; border-radius: 4px 4px 0 0;
-            border: 2px solid #000; box-shadow: inset 18px 0 0 #fff; z-index: 3;
-        }
-        /* Cabelo Castanho */
-        .luca-hair {
-            position: absolute; top: 0; left: 12px; width: 46px; height: 25px;
-            background: #5c3d2e; border: 2px solid #000; border-radius: 4px; z-index: 2;
-        }
-        /* Rosto */
-        .luca-face {
-            position: absolute; top: 21px; left: 15px; width: 40px; height: 25px;
-            background: #fbc531; border: 2px solid #000; z-index: 1;
-        }
-        /* Olhos */
-        .luca-face::after {
-            content: ""; position: absolute; top: 6px; left: 6px;
-            width: 6px; height: 6px; background: #000;
-            box-shadow: 20px 0 0 #000;
-        }
-        /* Casaco Verde Escuro */
-        .luca-body {
-            position: absolute; top: 44px; left: 8px; width: 54px; height: 45px;
-            background: #1b4d3e; border: 2px solid #000; border-radius: 6px 6px 0 0;
-        }
-        /* Calça Preta */
-        .luca-legs {
-            position: absolute; top: 87px; left: 16px; width: 38px; height: 23px;
-            background: #2d3436; border: 2px solid #000;
-        }
+        .trainer-avatar-side img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
 
         h2.section-divider {
             text-align: center; margin: 40px 0 20px 0; font-weight: bold;
@@ -115,19 +77,11 @@
             padding: 30px 20px 20px 20px; box-shadow: 6px 6px 0px #000;
             position: relative; display: flex; flex-direction: column; align-items: center;
         }
-
         .pin-girafa { position: absolute; top: -12px; left: -12px; font-size: 26px; transform: rotate(-15deg); user-select: none; }
         .pin-pokebola { position: absolute; bottom: -12px; right: -12px; font-size: 22px; user-select: none; }
+        .team-box h3 { font-size: 1.4rem; text-transform: uppercase; margin-bottom: 20px; border-bottom: 3px solid #000; width: 100%; text-align: center; padding-bottom: 5px; }
 
-        .team-box h3 {
-            font-size: 1.4rem; text-transform: uppercase; margin-bottom: 20px;
-            border-bottom: 3px solid #000; width: 100%; text-align: center; padding-bottom: 5px;
-        }
-
-        .pokemon-slots {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(2, 1fr); gap: 15px; width: 100%;
-        }
+        .pokemon-slots { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); gap: 15px; width: 100%; }
 
         .slot {
             background: #fff; border: 3px solid #000; border-radius: 8px;
@@ -148,23 +102,37 @@
             border-radius: 6px; padding: 8px; box-shadow: 3px 3px 0px rgba(0,0,0,0.3);
             z-index: 10; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; text-align: left;
         }
-        .dex-popup::after {
-            content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-            border-width: 6px; border-style: solid; border-color: #2d3436 transparent transparent transparent;
-        }
+        .dex-popup::after { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-width: 6px; border-style: solid; border-color: #2d3436 transparent transparent transparent; }
         .slot:hover .dex-popup { opacity: 1; transform: translateX(-50%) scale(1); pointer-events: auto; }
         .dex-popup-title { font-size: 9px; font-weight: bold; color: var(--poke-red); text-transform: uppercase; margin-bottom: 3px; border-bottom: 1px dashed #fff; padding-bottom: 2px;}
         .dex-popup-desc { font-size: 8px; line-height: 1.3; font-family: monospace; }
 
-        /* --- SEÇÃO DE INSÍGNIAS --- */
+        /* --- SYSTEMA DE ABAS DE PASTA (INSÍGNIAS) --- */
+        .badge-tabs-container { margin-bottom: 50px; position: relative; }
+        
+        /* Orelhas da pasta fichário */
+        .folder-tabs { display: flex; gap: 4px; padding-left: 10px; }
+        .folder-tab {
+            background: #b2bec3; color: #000; border: 4px solid #000;
+            border-bottom: none; border-radius: 10px 10px 0 0; padding: 8px 16px;
+            font-size: 0.9rem; font-weight: bold; text-transform: uppercase;
+            cursor: pointer; position: relative; z-index: 1; top: 4px;
+            transition: background 0.2s, top 0.2s;
+        }
+        .folder-tab.active-folder { background: #dfe6e9; top: 0px; padding-bottom: 12px; z-index: 3; }
+
+        /* Corpo da pasta */
         .badges-box {
-            background: #dfe6e9; border: 4px solid #000; border-radius: 15px;
-            padding: 25px; box-shadow: 6px 6px 0px #000; position: relative; margin-bottom: 50px;
+            background: #dfe6e9; border: 4px solid #000; border-radius: 0 15px 15px 15px;
+            padding: 30px 25px 25px 25px; box-shadow: 6px 6px 0px #000; position: relative; z-index: 2;
         }
-        .badges-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; width: 100%;
-        }
+        .badges-content { display: none; }
+        .badges-content.active-content { display: block; }
+
+        .badges-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; width: 100%; }
         @media(min-width: 600px) { .badges-grid { grid-template-columns: repeat(8, 1fr); } }
+        .badges-grid .slot { height: 85px; background: #fff; }
+        .badges-grid .slot img { width: 45px; height: 45px; }
 
         /* --- SEÇÃO DE MOMENTOS --- */
         .flash-card { 
@@ -172,10 +140,7 @@
             border-radius: 20px; box-shadow: 0 6px 20px rgba(0,0,0,0.04); 
             margin-bottom: 35px; overflow: hidden; border: 2px solid #e1e2ef;
         }
-        @media(min-width: 650px) {
-            .flash-card { flex-direction: row; }
-            .flash-card:nth-child(even) { flex-direction: row-reverse; }
-        }
+        @media(min-width: 650px) { .flash-card { flex-direction: row; } .flash-card:nth-child(even) { flex-direction: row-reverse; } }
         .photo-area { position: relative; flex: 1; min-height: 250px; background: #cbd5e1; }
         .photo-area img.screenshot { width: 100%; height: 100%; object-fit: cover; display: block; }
         .text-area { flex: 1; padding: 30px; display: flex; flex-direction: column; justify-content: center; }
@@ -218,12 +183,8 @@
                     </p>
                 </div>
                 <div class="trainer-avatar-side">
-                    <div class="pixel-luca">
-                        <div class="luca-hair"></div>
-                        <div class="luca-face"></div>
-                        <div class="luca-body"></div>
-                        <div class="luca-legs"></div>
-                    </div>
+                    <!-- Buscando o arquivo real que você subir depois -->
+                    <img src="lucaskin.png" alt="Luca Paim">
                 </div>
             </div>
         </div>
@@ -399,120 +360,121 @@
             </div>
         </div>
 
-        <!-- ================= SEÇÃO DE INSÍGNIAS ================= -->
+        <!-- ================= SEÇÃO DE INSÍGNIAS (SISTEMA DE ABAS) ================= -->
         <h2 class="section-divider">Insígnias Conquistadas</h2>
-        <div class="badges-box">
-            <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
-            <div class="badges-grid">
-                <div class="slot">
-                    <div class="dex-popup"><div class="dex-popup-title">Insígnia da Rocha</div><div class="dex-popup-desc">LÍDER: Brock<br>INFO: Conquistada com muita estratégia na primeira batalha.</div></div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/1.png" alt="Rocha">
+        
+        <div class="badge-tabs-container">
+            <!-- Abas Estilo Orelha de Fichário -->
+            <div class="folder-tabs">
+                <div class="folder-tab active-folder" onclick="mudarPasta(event, 'kanto-badges')">Kanto</div>
+                <div class="folder-tab" onclick="mudarPasta(event, 'johto-badges')">Johto</div>
+                <div class="folder-tab" onclick="mudarPasta(event, 'hoenn-badges')">Hoenn</div>
+                <div class="folder-tab" onclick="mudarPasta(event, 'sinnoh-badges')">Sinnoh</div>
+            </div>
+            
+            <!-- Caixa Principal da Pasta -->
+            <div class="badges-box">
+                <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
+                
+                <!-- CONTEÚDO KANTO -->
+                <div id="kanto-badges" class="badges-content active-content">
+                    <div class="badges-grid">
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia da Rocha</div><div class="dex-popup-desc">LÍDER: Brock<br>INFO: Pedra cinza firme como nossa união.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/1.png" alt="Rocha"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia da Cascata</div><div class="dex-popup-desc">LÍDER: Misty<br>INFO: Gotinha d'água conquistada em alto mar.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/2.png" alt="Cascata"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia do Trovão</div><div class="dex-popup-desc">LÍDER: Lt. Surge<br>INFO: Choque elétrico de pura adrenalina.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/3.png" alt="Trovão"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Arco-Íris</div><div class="dex-popup-desc">LÍDER: Erika<br>INFO: Colorida e cheia de vida como nossos dias.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/4.png" alt="Arco-Iris"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia da Alma</div><div class="dex-popup-desc">LÍDER: Koga<br>INFO: Coração ninja focado no objetivo.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/5.png" alt="Alma"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia do Pântano</div><div class="dex-popup-desc">LÍDER: Sabrina<br>INFO: Conexão psíquica inexplicável entre nós.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/6.png" alt="Pantano"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia do Vulcão</div><div class="dex-popup-desc">LÍDER: Blaine<br>INFO: Fogo ardente que aquece o peito.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/7.png" alt="Vulcão"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia da Terra</div><div class="dex-popup-desc">LÍDER: Giovanni<br>INFO: A conquista final do solo de Kanto!</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/8.png" alt="Terra"></div>
+                    </div>
                 </div>
-                <div class="slot">
-                    <div class="dex-popup"><div class="dex-popup-title">Insígnia da Cascata</div><div class="dex-popup-desc">LÍDER: Misty<br>INFO: Superando as correntes e os monstrinhos aquáticos.</div></div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/2.png" alt="Cascata">
+
+                <!-- CONTEÚDO JOHTO -->
+                <div id="johto-badges" class="badges-content">
+                    <div class="badges-grid">
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Zephyr</div><div class="dex-popup-desc">LÍDER: Falkner<br>INFO: Leve como o vento sob as asas.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/9.png" alt="Zephyr"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Hive</div><div class="dex-popup-desc">LÍDER: Bugsy<br>INFO: Conquistada contra a colmeia de insetos.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/10.png" alt="Hive"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Plain</div><div class="dex-popup-desc">LÍDER: Whitney<br>INFO: Aquela Miltank rolante quase destruiu a gente.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/11.png" alt="Plain"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Fog</div><div class="dex-popup-desc">LÍDER: Morty<br>INFO: Nevoeiro fantasmagórico atravessado com sucesso.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/12.png" alt="Fog"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Storm</div><div class="dex-popup-desc">LÍDER: Chuck<br>INFO: Força bruta e foco no treinamento pesado.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/13.png" alt="Storm"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Mineral</div><div class="dex-popup-desc">LÍDER: Jasmine<br>INFO: Brilho metálico e blindagem de aço pura.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/14.png" alt="Mineral"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Glacier</div><div class="dex-popup-desc">LÍDER: Pryce<br>INFO: Gelo eterno que derrete com seu sorriso.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/15.png" alt="Glacier"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Rising</div><div class="dex-popup-desc">LÍDER: Clair<br>INFO: O poder supremo dos dragões superado!</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/16.png" alt="Rising"></div>
+                    </div>
                 </div>
-                <div class="slot">
-                    <div class="dex-popup"><div class="dex-popup-title">Insígnia do Trovão</div><div class="dex-popup-desc">LÍDER: Lt. Surge<br>INFO: Batalha eletrizante contra o Raichu.</div></div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/3.png" alt="Trovão">
+
+                <!-- CONTEÚDO HOENN -->
+                <div id="hoenn-badges" class="badges-content">
+                    <div class="badges-grid">
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Stone</div><div class="dex-popup-desc">LÍDER: Roxanne<br>INFO: Estrutura mineral sólida de Rustboro.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/17.png" alt="Stone"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Knuckle</div><div class="dex-popup-desc">LÍDER: Brawly<br>INFO: Batalha na areia contra lutadores brabos.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/18.png" alt="Knuckle"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Dynamo</div><div class="dex-popup-desc">LÍDER: Wattson<br>INFO: Geradores e armadilhas elétricas desativadas.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/19.png" alt="Dynamo"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Heat</div><div class="dex-popup-desc">LÍDER: Flannery<br>INFO: Águas termais e fumaça vulcânica escaldante.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/20.png" alt="Heat"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Balance</div><div class="dex-popup-desc">LÍDER: Norman<br>INFO: Teste de equilíbrio contra o próprio pai do herói.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/21.png" alt="Balance"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Feather</div><div class="dex-popup-desc">LÍDER: Winona<br>INFO: Batalha aérea nas alturas de Fortree.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/22.png" alt="Feather"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Mind</div><div class="dex-popup-desc">LÍDER: Tate & Liza<br>INFO: Batalha em dupla sincronizada perfeita.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/23.png" alt="Mind"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Rain</div><div class="dex-popup-desc">LÍDER: Wallace<br>INFO: Ilusões de gelo e água no ginásio final de Hoenn.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/24.png" alt="Rain"></div>
+                    </div>
                 </div>
-                <div class="slot">
-                    <div class="dex-popup"><div class="dex-popup-title">Insígnia Arco-Íris</div><div class="dex-popup-desc">LÍDER: Erika<br>INFO: O perfume do ginásio de planta quase nos distraiu.</div></div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/4.png" alt="Arco-Iris">
+
+                <!-- CONTEÚDO SINNOH -->
+                <div id="sinnoh-badges" class="badges-content">
+                    <div class="badges-grid">
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Coal</div><div class="dex-popup-desc">LÍDER: Roark<br>INFO: Mineração de carvão pesada em Oreburgh.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/25.png" alt="Coal"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Forest</div><div class="dex-popup-desc">LÍDER: Gardenia<br>INFO: Cortando espinhos nas matas profundas.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/26.png" alt="Forest"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Cobble</div><div class="dex-popup-desc">LÍDER: Maylene<br>INFO: Soco direto e resistência em Veilstone.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/27.png" alt="Cobble"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Fen</div><div class="dex-popup-desc">LÍDER: Crasher Wake<br>INFO: Pântanos alagados e mergulhos profundos.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/28.png" alt="Fen"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Relic</div><div class="dex-popup-desc">LÍDER: Fantina<br>INFO: Dança sombria de fantasmas na catedral.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/29.png" alt="Relic"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Mine</div><div class="dex-popup-desc">LÍDER: Byron<br>INFO: Paredes de metal fortificadas nas minas de aço.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/30.png" alt="Mine"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Icicle</div><div class="dex-popup-desc">LÍDER: Candice<br>INFO: Deslizando no gelo liso de Snowpoint.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/31.png" alt="Icicle"></div>
+                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Beacon</div><div class="dex-popup-desc">LÍDER: Volkner<br>INFO: Farol de alta voltagem que fecha a jornada de Sinnoh!</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/32.png" alt="Beacon"></div>
+                    </div>
                 </div>
-                <div class="slot">
-                    <div class="dex-popup"><div class="dex-popup-title">Insígnia da Alma</div><div class="dex-popup-desc">LÍDER: Koga<br>INFO: Desviando das paredes invisíveis dos ninjas.</div></div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/5.png" alt="Alma">
-                </div>
-                <div class="slot">
-                    <div class="dex-popup"><div class="dex-popup-title">Insígnia do Pântano</div><div class="dex-popup-desc">LÍDER: Sabrina<br>INFO: Vitória mental contra os poderes psíquicos.</div></div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/6.png" alt="Pantano">
-                </div>
-                <div class="slot">
-                    <div class="dex-popup"><div class="dex-popup-title">Insígnia do Vulcão</div><div class="dex-popup-desc">LÍDER: Blaine<br>INFO: Respondendo charadas no calor da lava.</div></div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/7.png" alt="Vulcão">
-                </div>
-                <div class="slot">
-                    <div class="dex-popup"><div class="dex-popup-title">Insígnia da Terra</div><div class="dex-popup-desc">LÍDER: Giovanni<br>INFO: Derrotando a Equipe Rocket no ginásio final.</div></div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/8.png" alt="Terra">
-                </div>
+
             </div>
         </div>
 
         <!-- ================= SEÇÃO DE MOMENTOS (14 SLOTS) ================= -->
         <h2 class="section-divider">Nossos Momentos — 14 Screenshots</h2>
 
-        <div class="flash-card">
-            <div class="photo-area"><img src="poke1.jpg" alt="Print 1" class="screenshot"><div class="corner-ball">🔴</div></div>
-            <div class="text-area"><h3>Momento #01</h3><p>Edite o texto do print aqui.</p></div>
-        </div>
-
-        <div class="flash-card">
-            <div class="photo-area"><img src="poke2.jpg" alt="Print 2" class="screenshot"><div class="corner-ball">🔴</div></div>
-            <div class="text-area"><h3>Momento #02</h3><p>Edite o texto do print aqui.</p></div>
-        </div>
-
-        <div class="flash-card">
-            <div class="photo-area"><img src="poke3.jpg" alt="Print 3" class="screenshot"><div class="corner-ball">🔴</div></div>
-            <div class="text-area"><h3>Momento #03</h3><p>Edite o texto do print aqui.</p></div>
-        </div>
-
-        <div class="flash-card">
-            <div class="photo-area"><img src="poke4.jpg" alt="Print 4" class="screenshot"><div class="corner-ball">🔴</div></div>
-            <div class="text-area"><h3>Momento #04</h3><p>Edite o texto do print aqui.</p></div>
-        </div>
-
-        <div class="flash-card">
-            <div class="photo-area"><img src="poke5.jpg" alt="Print 5" class="screenshot"><div class="corner-ball">🔴</div></div>
-            <div class="text-area"><h3>Momento #05</h3><p>Edite o texto do print aqui.</p></div>
-        </div>
-
-        <div class="flash-card">
-            <div class="photo-area"><img src="poke6.jpg" alt="Print 6" class="screenshot"><div class="corner-ball">🔴</div></div>
-            <div class="text-area"><h3>Momento #06</h3><p>Edite o texto do print aqui.</p></div>
-        </div>
-
-        <div class="flash-card">
-            <div class="photo-area"><img src="poke7.jpg" alt="Print 7" class="screenshot"><div class="corner-ball">🔴</div></div>
-            <div class="text-area"><h3>Momento #07</h3><p>Edite o texto do print aqui.</p></div>
-        </div>
-
-        <div class="flash-card">
-            <div class="photo-area"><img src="poke8.jpg" alt="Print 8" class="screenshot"><div class="corner-ball">🔴</div></div>
-            <div class="text-area"><h3>Momento #08</h3><p>Edite o texto do print aqui.</p></div>
-        </div>
-
-        <div class="flash-card">
-            <div class="photo-area"><img src="poke9.jpg" alt="Print 9" class="screenshot"><div class="corner-ball">🔴</div></div>
-            <div class="text-area"><h3>Momento #09</h3><p>Edite o texto do print aqui.</p></div>
-        </div>
-
-        <div class="flash-card">
-            <div class="photo-area"><img src="poke10.jpg" alt="Print 10" class="screenshot"><div class="corner-ball">🔴</div></div>
-            <div class="text-area"><h3>Momento #10</h3><p>Edite o texto do print aqui.</p></div>
-        </div>
-
-        <div class="flash-card">
-            <div class="photo-area"><img src="poke11.jpg" alt="Print 11" class="screenshot"><div class="corner-ball">🔴</div></div>
-            <div class="text-area"><h3>Momento #11</h3><p>Edite o texto do print aqui.</p></div>
-        </div>
-
-        <div class="flash-card">
-            <div class="photo-area"><img src="poke12.jpg" alt="Print 12" class="screenshot"><div class="corner-ball">🔴</div></div>
-            <div class="text-area"><h3>Momento #12</h3><p>Edite o texto do print aqui.</p></div>
-        </div>
-
-        <div class="flash-card">
-            <div class="photo-area"><img src="poke13.jpg" alt="Print 13" class="screenshot"><div class="corner-ball">🔴</div></div>
-            <div class="text-area"><h3>Momento #13</h3><p>Edite o texto do print aqui.</p></div>
-        </div>
-
-        <div class="flash-card">
-            <div class="photo-area"><img src="poke14.jpg" alt="Print 14" class="screenshot"><div class="corner-ball">🔴</div></div>
-            <div class="text-area"><h3>Momento #14</h3><p>Edite o texto do print aqui.</p></div>
-        </div>
+        <!-- Os blocos de prints que você vai preencher depois -->
+        <div class="flash-card"><div class="photo-area"><img src="poke1.jpg" alt="Print 1" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Momento #01</h3><p>Edite o texto do print aqui.</p></div></div>
+        <div class="flash-card"><div class="photo-area"><img src="poke2.jpg" alt="Print 2" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Momento #02</h3><p>Edite o texto do print aqui.</p></div></div>
+        <div class="flash-card"><div class="photo-area"><img src="poke3.jpg" alt="Print 3" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Momento #03</h3><p>Edite o texto do print aqui.</p></div></div>
+        <div class="flash-card"><div class="photo-area"><img src="poke4.jpg" alt="Print 4" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Momento #04</h3><p>Edite o texto do print aqui.</p></div></div>
+        <div class="flash-card"><div class="photo-area"><img src="poke5.jpg" alt="Print 5" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Momento #05</h3><p>Edite o texto do print aqui.</p></div></div>
+        <div class="flash-card"><div class="photo-area"><img src="poke6.jpg" alt="Print 6" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Momento #06</h3><p>Edite o texto do print aqui.</p></div></div>
+        <div class="flash-card"><div class="photo-area"><img src="poke7.jpg" alt="Print 7" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Momento #07</h3><p>Edite o texto do print aqui.</p></div></div>
+        <div class="flash-card"><div class="photo-area"><img src="poke8.jpg" alt="Print 8" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Momento #08</h3><p>Edite o texto do print aqui.</p></div></div>
+        <div class="flash-card"><div class="photo-area"><img src="poke9.jpg" alt="Print 9" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Momento #09</h3><p>Edite o texto do print aqui.</p></div></div>
+        <div class="flash-card"><div class="photo-area"><img src="poke10.jpg" alt="Print 10" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Momento #10</h3><p>Edite o texto do print aqui.</p></div></div>
+        <div class="flash-card"><div class="photo-area"><img src="poke11.jpg" alt="Print 11" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Momento #11</h3><p>Edite o texto do print aqui.</p></div></div>
+        <div class="flash-card"><div class="photo-area"><img src="poke12.jpg" alt="Print 12" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Momento #12</h3><p>Edite o texto do print aqui.</p></div></div>
+        <div class="flash-card"><div class="photo-area"><img src="poke13.jpg" alt="Print 13" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Momento #13</h3><p>Edite o texto do print aqui.</p></div></div>
+        <div class="flash-card"><div class="photo-area"><img src="poke14.jpg" alt="Print 14" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Momento #14</h3><p>Edite o texto do print aqui.</p></div></div>
 
     </div>
 
+    <!-- LÓGICA DE CLIQUE NAS ABAS DA PASTA -->
+    <script>
+        function mudarPasta(evt, nomeRegiao) {
+            // Esconde todos os conteudos de insignias
+            const conteudos = document.getElementsByClassName("badges-content");
+            for (let i = 0; i < conteudos.length; i++) {
+                conteudos[i].classList.remove("active-content");
+            }
+
+            // Remove a classe active de todas as abas
+            const abas = document.getElementsByClassName("folder-tab");
+            for (let i = 0; i < abas.length; i++) {
+                abas[i].classList.remove("active-folder");
+            }
+
+            // Mostra o conteudo atual e marca a aba como ativa
+            document.getElementById(nomeRegiao).classList.add("active-content");
+            evt.currentTarget.classList.add("active-folder");
+        }
+    </script>
 </body>
 </html>
