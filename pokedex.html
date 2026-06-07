@@ -13,6 +13,8 @@
             --text: #2d3436; 
             --poke-red: #ff7675;
             --poke-blue: #74b9ff;
+            --trainer-blue: #2980b9;
+            --trainer-card-bg: #3498db;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Courier New', Courier, monospace; }
         
@@ -34,8 +36,68 @@
         
         .pokedex-title {
             text-align: center; background: var(--poke-red); color: white; padding: 15px;
-            border: 4px solid #000; border-radius: 10px; margin-bottom: 40px;
+            border: 4px solid #000; border-radius: 10px; margin-bottom: 30px;
             box-shadow: 4px 4px 0px #000; text-transform: uppercase; letter-spacing: 2px;
+        }
+
+        /* --- TRAINER CARD DESIGN --- */
+        .trainer-card-wrapper {
+            max-width: 500px; margin: 0 auto 40px auto;
+            background: var(--trainer-blue); border: 5px solid #000;
+            border-radius: 15px; padding: 20px; box-shadow: 6px 6px 0px #000;
+            color: #fff; position: relative;
+        }
+        .trainer-card-header {
+            font-size: 1.4rem; text-align: center; font-weight: bold;
+            border-bottom: 3px double #fff; padding-bottom: 8px; margin-bottom: 15px;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .trainer-card-body { display: flex; gap: 15px; }
+        .trainer-info-side { flex: 1.3; font-size: 0.95rem; line-height: 1.8; }
+        .trainer-info-side border-line { border-bottom: 2px solid rgba(255,255,255,0.3); margin-bottom: 8px; }
+        .trainer-info-side span.label { color: #ffeaa7; font-weight: bold; }
+        
+        /* AVATAR DO LUCA PIXELADO EM CSS */
+        .trainer-avatar-side { 
+            flex: 1; background: #ecf0f1; border: 3px solid #000; 
+            border-radius: 10px; height: 160px; position: relative;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .pixel-luca {
+            width: 70px; height: 110px; position: relative; margin-top: 25px;
+        }
+        /* Boné Ash/Pokémon */
+        .pixel-luca::before {
+            content: ""; position: absolute; top: -14px; left: 10px;
+            width: 50px; height: 16px; background: #e74c3c; border-radius: 4px 4px 0 0;
+            border: 2px solid #000; box-shadow: inset 18px 0 0 #fff; z-index: 3;
+        }
+        /* Cabelo Castanho */
+        .luca-hair {
+            position: absolute; top: 0; left: 12px; width: 46px; height: 25px;
+            background: #5c3d2e; border: 2px solid #000; border-radius: 4px; z-index: 2;
+        }
+        /* Rosto */
+        .luca-face {
+            position: absolute; top: 21px; left: 15px; width: 40px; height: 25px;
+            background: #fbc531; border: 2px solid #000; z-index: 1;
+        }
+        /* Olhos */
+        .luca-face::after {
+            content: ""; position: absolute; top: 6px; left: 6px;
+            width: 6px; height: 6px; background: #000;
+            box-shadow: 20px 0 0 #000;
+        }
+        /* Casaco Verde Escuro */
+        .luca-body {
+            position: absolute; top: 44px; left: 8px; width: 54px; height: 45px;
+            background: #1b4d3e; border: 2px solid #000; border-radius: 6px 6px 0 0;
+        }
+        /* Calça Preta */
+        .luca-legs {
+            position: absolute; top: 87px; left: 16px; width: 38px; height: 23px;
+            background: #2d3436; border: 2px solid #000;
         }
 
         h2.section-divider {
@@ -54,8 +116,8 @@
             position: relative; display: flex; flex-direction: column; align-items: center;
         }
 
-        .pin-girafa { position: absolute; top: -10px; left: -10px; font-size: 24px; transform: rotate(-15deg); user-select: none; }
-        .pin-pokebola { position: absolute; bottom: -10px; right: -10px; font-size: 20px; user-select: none; }
+        .pin-girafa { position: absolute; top: -12px; left: -12px; font-size: 26px; transform: rotate(-15deg); user-select: none; }
+        .pin-pokebola { position: absolute; bottom: -12px; right: -12px; font-size: 22px; user-select: none; }
 
         .team-box h3 {
             font-size: 1.4rem; text-transform: uppercase; margin-bottom: 20px;
@@ -67,7 +129,6 @@
             grid-template-rows: repeat(2, 1fr); gap: 15px; width: 100%;
         }
 
-        /* ESTILO DO COMPONENTE DO SLOT (POSIÇÃO RELATIVA PARA CONTROLAR O POP-UP) */
         .slot {
             background: #fff; border: 3px solid #000; border-radius: 8px;
             height: 95px; display: flex; flex-direction: column;
@@ -75,65 +136,35 @@
             cursor: pointer; transition: transform 0.2s, background-color 0.2s;
             padding: 5px;
         }
-
-        .slot:hover {
-            transform: translateY(-8px);
-            background: var(--primary-light);
-        }
-
-        .slot img {
-            width: 56px; height: 56px; object-fit: contain;
-            image-rendering: pixelated; transition: transform 0.1s;
-        }
-
+        .slot:hover { transform: translateY(-8px); background: var(--primary-light); }
+        .slot img { width: 56px; height: 56px; object-fit: contain; image-rendering: pixelated; transition: transform 0.1s; }
         .slot:hover img { transform: scale(1.15); }
+        .poke-name { font-size: 9px; font-weight: bold; text-transform: uppercase; margin-top: 2px; text-align: center; color: #000; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-        .poke-name {
-            font-size: 9px; font-weight: bold; text-transform: uppercase;
-            margin-top: 2px; text-align: center; color: #000;
-            max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-        }
-
-        /* --- BALÃO DA POKEDEX (POP-UP SOLICITADO NO HOVER) --- */
+        /* --- TOOLTIP POP-UP --- */
         .dex-popup {
-            position: absolute;
-            bottom: 110%; /* Fica em cima do quadrado */
-            left: 50%;
-            transform: translateX(-50%) scale(0.8);
-            width: 160px;
-            background: #2d3436;
-            color: #fff;
-            border: 2px solid #000;
-            border-radius: 6px;
-            padding: 8px;
-            box-shadow: 3px 3px 0px rgba(0,0,0,0.3);
-            z-index: 10;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s, transform 0.2s;
-            text-align: left;
+            position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%) scale(0.8);
+            width: 160px; background: #2d3436; color: #fff; border: 2px solid #000;
+            border-radius: 6px; padding: 8px; box-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+            z-index: 10; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; text-align: left;
         }
-
-        /* Setinha apontando para baixo no balão */
         .dex-popup::after {
-            content: "";
-            position: absolute;
-            top: 100%; left: 50%;
-            transform: translateX(-50%);
-            border-width: 6px;
-            border-style: solid;
-            border-color: #2d3436 transparent transparent transparent;
+            content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+            border-width: 6px; border-style: solid; border-color: #2d3436 transparent transparent transparent;
         }
-
-        /* Ativa o pop-up quando passa o mouse no slot */
-        .slot:hover .dex-popup {
-            opacity: 1;
-            transform: translateX(-50%) scale(1);
-            pointer-events: auto;
-        }
-
+        .slot:hover .dex-popup { opacity: 1; transform: translateX(-50%) scale(1); pointer-events: auto; }
         .dex-popup-title { font-size: 9px; font-weight: bold; color: var(--poke-red); text-transform: uppercase; margin-bottom: 3px; border-bottom: 1px dashed #fff; padding-bottom: 2px;}
         .dex-popup-desc { font-size: 8px; line-height: 1.3; font-family: monospace; }
+
+        /* --- SEÇÃO DE INSÍGNIAS --- */
+        .badges-box {
+            background: #dfe6e9; border: 4px solid #000; border-radius: 15px;
+            padding: 25px; box-shadow: 6px 6px 0px #000; position: relative; margin-bottom: 50px;
+        }
+        .badges-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; width: 100%;
+        }
+        @media(min-width: 600px) { .badges-grid { grid-template-columns: repeat(8, 1fr); } }
 
         /* --- SEÇÃO DE MOMENTOS --- */
         .flash-card { 
@@ -172,11 +203,35 @@
             <h2>Cobbleverse Trainer Index</h2>
         </div>
 
+        <!-- ================= FICHA DE TREINADOR ================= -->
+        <div class="trainer-card-wrapper">
+            <div class="trainer-card-header">Trainer Card</div>
+            <div class="trainer-card-body">
+                <div class="trainer-info-side">
+                    <p><span class="label">NAME:</span> Luca Paim</p>
+                    <p><span class="label">NATURE:</span> Dócil e Adorável</p>
+                    <p><span class="label">POKÉDEX:</span> 1025</p>
+                    <p><span class="label">MONEY:</span> ₽ Infinito</p>
+                    <div style="height: 10px;"></div>
+                    <p style="font-size: 11px; color: #ffeaa7; font-style: italic; border-top: 1px dashed #fff; padding-top: 5px;">
+                        "O melhor treinador do mundo, momo"
+                    </p>
+                </div>
+                <div class="trainer-avatar-side">
+                    <div class="pixel-luca">
+                        <div class="luca-hair"></div>
+                        <div class="luca-face"></div>
+                        <div class="luca-body"></div>
+                        <div class="luca-legs"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- ================= SEÇÃO DE TIMES ================= -->
-        <h2 class="section-divider">Nossos Times Regionais</h2>
+        <h2 class="section-divider">Times regionais de Luca Paim</h2>
         
         <div class="teams-grid">
-            
             <!-- KANTO -->
             <div class="team-box">
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
@@ -221,7 +276,7 @@
                 <h3>Johto</h3>
                 <div class="pokemon-slots">
                     <div class="slot">
-                        <div class="dex-popup"><div class="dex-popup-title">Meganium</div><div class="dex-popup-desc">TIPO: Planta<br>INFO: Monstrinho inicial dócil com uma flor enorme no pescoço.</div></div>
+                        <div class="dex-popup"><div class="dex-popup-title">Meganium</div><div class="dex-popup-desc">TIPO: Planta<br>INFO: Monstrinho inicial dócil com uma flor enorme.</div></div>
                         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/154.png" alt="Meganium">
                         <div class="poke-name">Meganium</div>
                     </div>
@@ -322,7 +377,7 @@
                         <div class="poke-name">Froslass</div>
                     </div>
                     <div class="slot">
-                        <div class="dex-popup"><div class="dex-popup-title">Floatzel</div><div class="dex-popup-desc">TIPO: Água<br>INFO: Ariranha nadadora equipada com uma boia natural no pescoço.</div></div>
+                        <div class="dex-popup"><div class="dex-popup-title">Floatzel</div><div class="dex-popup-desc">TIPO: Água<br>INFO: Ariranha nadadora equipada com uma boia natural.</div></div>
                         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/419.png" alt="Floatzel">
                         <div class="poke-name">Floatzel</div>
                     </div>
@@ -334,41 +389,55 @@
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
                 <h3>Unova (COMING SOON)</h3>
                 <div class="pokemon-slots">
-                    <div class="slot">
-                        <div class="dex-popup"><div class="dex-popup-title">Serperior</div><div class="dex-popup-desc">TIPO: Planta<br>INFO: Serpente real majestosa que intimida com o olhar.</div></div>
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/497.png" alt="Serperior">
-                        <div class="poke-name">Serperior</div>
-                    </div>
-                    <div class="slot">
-                        <div class="dex-popup"><div class="dex-popup-title">Swanna</div><div class="dex-popup-desc">TIPO: Água/Voador<br>INFO: Cisne elegante que bate asas fortes para voar longe.</div></div>
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/581.png" alt="Swanna">
-                        <div class="poke-name">Swanna</div>
-                    </div>
-                    <div class="slot">
-                        <div class="dex-popup"><div class="dex-popup-title">Chandelure</div><div class="dex-popup-desc">TIPO: Fantasma/Fogo<br>INFO: Lustre assombrado que queima as almas com chamas hipnóticas.</div></div>
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/609.png" alt="Chandelure">
-                        <div class="poke-name">Chandelure</div>
-                    </div>
-                    <div class="slot">
-                        <div class="dex-popup"><div class="dex-popup-title">Excadrill</div><div class="dex-popup-desc">TIPO: Terra/Aço<br>INFO: Toupeira de aço blindada que fura túneis subterrâneos.</div></div>
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/530.png" alt="Excadrill">
-                        <div class="poke-name">Excadrill</div>
-                    </div>
-                    <div class="slot">
-                        <div class="dex-popup"><div class="dex-popup-title">Cinccino</div><div class="dex-popup-desc">TIPO: Normal<br>INFO: Chinchila fofinha com pelos macios que repelem sujeira.</div></div>
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/573.png" alt="Cinccino">
-                        <div class="poke-name">Cinccino</div>
-                    </div>
-                    <div class="slot">
-                        <div class="dex-popup"><div class="dex-popup-title">Mienshao</div><div class="dex-popup-desc">TIPO: Lutador<br>INFO: Mestre de artes marciais que ataca rápido usando os braços.</div></div>
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/620.png" alt="Mienshao">
-                        <div class="poke-name">Mienshao</div>
-                    </div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/497.png" alt="Serperior"><div class="poke-name">Serperior</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/581.png" alt="Swanna"><div class="poke-name">Swanna</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/609.png" alt="Chandelure"><div class="poke-name">Chandelure</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/530.png" alt="Excadrill"><div class="poke-name">Excadrill</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/573.png" alt="Cinccino"><div class="poke-name">Cinccino</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/620.png" alt="Mienshao"><div class="poke-name">Mienshao</div></div>
                 </div>
             </div>
-
         </div>
 
+        <!-- ================= SEÇÃO DE INSÍGNIAS ================= -->
+        <h2 class="section-divider">Insígnias Conquistadas</h2>
+        <div class="badges-box">
+            <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
+            <div class="badges-grid">
+                <div class="slot">
+                    <div class="dex-popup"><div class="dex-popup-title">Insígnia da Rocha</div><div class="dex-popup-desc">LÍDER: Brock<br>INFO: Conquistada com muita estratégia na primeira batalha.</div></div>
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/1.png" alt="Rocha">
+                </div>
+                <div class="slot">
+                    <div class="dex-popup"><div class="dex-popup-title">Insígnia da Cascata</div><div class="dex-popup-desc">LÍDER: Misty<br>INFO: Superando as correntes e os monstrinhos aquáticos.</div></div>
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/2.png" alt="Cascata">
+                </div>
+                <div class="slot">
+                    <div class="dex-popup"><div class="dex-popup-title">Insígnia do Trovão</div><div class="dex-popup-desc">LÍDER: Lt. Surge<br>INFO: Batalha eletrizante contra o Raichu.</div></div>
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/3.png" alt="Trovão">
+                </div>
+                <div class="slot">
+                    <div class="dex-popup"><div class="dex-popup-title">Insígnia Arco-Íris</div><div class="dex-popup-desc">LÍDER: Erika<br>INFO: O perfume do ginásio de planta quase nos distraiu.</div></div>
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/4.png" alt="Arco-Iris">
+                </div>
+                <div class="slot">
+                    <div class="dex-popup"><div class="dex-popup-title">Insígnia da Alma</div><div class="dex-popup-desc">LÍDER: Koga<br>INFO: Desviando das paredes invisíveis dos ninjas.</div></div>
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/5.png" alt="Alma">
+                </div>
+                <div class="slot">
+                    <div class="dex-popup"><div class="dex-popup-title">Insígnia do Pântano</div><div class="dex-popup-desc">LÍDER: Sabrina<br>INFO: Vitória mental contra os poderes psíquicos.</div></div>
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/6.png" alt="Pantano">
+                </div>
+                <div class="slot">
+                    <div class="dex-popup"><div class="dex-popup-title">Insígnia do Vulcão</div><div class="dex-popup-desc">LÍDER: Blaine<br>INFO: Respondendo charadas no calor da lava.</div></div>
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/7.png" alt="Vulcão">
+                </div>
+                <div class="slot">
+                    <div class="dex-popup"><div class="dex-popup-title">Insígnia da Terra</div><div class="dex-popup-desc">LÍDER: Giovanni<br>INFO: Derrotando a Equipe Rocket no ginásio final.</div></div>
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/8.png" alt="Terra">
+                </div>
+            </div>
+        </div>
 
         <!-- ================= SEÇÃO DE MOMENTOS (14 SLOTS) ================= -->
         <h2 class="section-divider">Nossos Momentos — 14 Screenshots</h2>
