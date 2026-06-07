@@ -5,24 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para o Luca, com amor</title>
     <style>
-        :root { --primary: #6c5ce7; --primary-light: #a29bfe; --bg: #f8f9fa; --card-bg: #ffffff; --text: #2d3436; }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        :root { 
+            --primary: #6c5ce7; 
+            --primary-light: #a29bfe; 
+            --bg: #f8f9fa; 
+            --card-bg: #ffffff; 
+            --text: #2d3436; 
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', -apple-system, sans-serif; }
         body { background-color: var(--bg); color: var(--text); padding-bottom: 50px; }
         
-        /* MENU DE NAVEGAÇÃO NO TOPO */
+        /* MENU DO TOPO */
         .nav-container { max-width: 800px; margin: 20px auto; padding: 0 20px; }
         .tabs-nav { display: flex; justify-content: space-around; background: var(--card-bg); padding: 10px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow-x: auto; }
         .tab-link { text-decoration: none; padding: 10px 20px; font-weight: bold; color: #636e72; border-radius: 20px; transition: 0.3s; white-space: nowrap; }
         .tab-link.active { background: var(--primary); color: white; }
         
-        header { text-align: center; padding: 40px 20px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 30px; }
-        header h1 { font-size: 2.5rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        .timers-container { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 30px; }
+        /* HEADER */
+        header { text-align: center; padding: 50px 20px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 40px; }
+        header h1 { font-size: 2.5rem; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
+        header p { font-size: 1.1rem; opacity: 0.9; }
+
+        /* CRONÔMETROS */
+        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+        .timers-container { display: grid; grid-template-columns: 1fr; gap: 25px; margin-bottom: 30px; }
         @media(min-width: 600px) { .timers-container { grid-template-columns: 1fr 1fr; } }
-        .timer-card { background: var(--card-bg); padding: 25px; border-radius: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 2px solid var(--primary-light); }
-        .timer-card h3 { font-size: 1rem; color: var(--primary); margin-bottom: 10px; text-transform: uppercase; }
-        .timer-display { font-size: 1.3rem; font-weight: bold; color: #2d3436; line-height: 1.5; }
+        
+        .timer-card { background: var(--card-bg); padding: 30px 20px; border-radius: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 2px solid #e1e2ef; transition: 0.3s; }
+        .timer-card:hover { border-color: var(--primary-light); transform: translateY(-2px); }
+        .timer-card h3 { font-size: 0.95rem; color: var(--primary); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+        .timer-display { font-size: 1.25rem; font-weight: bold; color: #2d3436; line-height: 1.6; }
     </style>
 </head>
 <body>
@@ -38,15 +50,17 @@
         </nav>
     </div>
 
+    <!-- CABEÇALHO -->
     <header>
         <h1>Feliz Dia dos Namorados!</h1>
         <p>Para o dono do meu sorriso mais bonito</p>
     </header>
 
+    <!-- CONTAINER DOS CRONÔMETROS -->
     <div class="container">
         <div class="timers-container">
             <div class="timer-card">
-                <h3>"PrimeiroOie"</h3>
+                <h3>Desde o primeiro Oie</h3>
                 <div id="tempo-conhecemos" class="timer-display">Calculando...</div>
             </div>
             <div class="timer-card">
@@ -57,22 +71,40 @@
     </div>
 
     <script>
-        // AJUSTE SUAS DATAS AQUI (Ano, Mês-1, Dia, Hora, Minuto)
-        const dataPrimeiroOie = new Date(2024, 1, 02, 00, 00, 0); 
-        const dataNamoro     = new Date(2025, 11, 04, 00, 0, 0);  
+        // DATAS CONFIGURADAS COM OS MESES CORRETOS (Fevereiro = 1, Dezembro = 11)
+        const dataPrimeiroOie = new Date(2024, 1, 2, 12, 0, 0);  // 02/02/2024 às 12:00
+        const dataNamoro      = new Date(2025, 11, 4, 20, 0, 0); // 04/12/2025 às 20:00
 
-        function calcularDiferenca(dataInicio, elementoId) {
-            const agora = new Date(); const diferenca = agora - dataInicio;
+        function calcularTempo(dataInicio, elementoId) {
+            const agora = new Date();
+            const diferenca = agora - dataInicio;
+
+            if (diferenca < 0) {
+                document.getElementById(elementoId).innerHTML = "Data no futuro!";
+                return;
+            }
+
             const anos = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365));
             const meses = Math.floor((diferenca % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
             const dias = Math.floor((diferenca % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
             const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
             const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
-            document.getElementById(elementoId).innerHTML = `${anos}a ${meses}m ${dias}d<br>${horas}h ${minutos}m ${segundos}s`;
+
+            document.getElementById(elementoId).innerHTML = 
+                `${anos} anos, ${meses} meses, ${dias} dias<br>${horas}h ${minutos}m ${segundos}s`;
         }
-        function atualizar() { calcularDiferenca(dataConhecemos, "PrimeiroOie"); calcularDiferenca(dataNamoro, "tempo-namoro"); }
-        setInterval(atualizar, 1000); window.onload = atualizar;
+
+        function atualizar() {
+            calcularTempo(dataPrimeiroOie, "tempo-conhecemos");
+            calcularTempo(dataNamoro, "tempo-namoro");
+        }
+
+        // Executa a atualização a cada segundo de forma segura
+        setInterval(atualizar, 1000);
+        
+        // Roda a primeira vez logo após carregar a página
+        document.addEventListener("DOMContentLoaded", atualizar);
     </script>
 </body>
 </html>
