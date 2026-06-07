@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeDex Cobbleverse</title>
+    <style>
+        :root { 
+            --primary: #6c5ce7; 
+            --primary-light: #a29bfe; 
+            --bg: #f8f9fa; 
+            --card-bg: #ffffff; 
+            --text: #2d3436; 
+            --poke-red: #ff7675;
+            --poke-blue: #74b9ff;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Courier New', Courier, monospace; }
+        
+        /* WALLPAPER CUSTOMIZADO: GIRAFA, POKEBOLA E MASTER BALL REPETIDOS */
+        body { 
+            background-color: #f1f2f6; 
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='60' viewBox='0 0 240 60'%3E%3Ctext x='10' y='35' style='font-size:16px; opacity:0.12;'%3E🦒%3C/text%3E%3Ctext x='40' y='35' style='font-size:14px; opacity:0.12;'%3E🔴%3C/text%3E%3Ctext x='70' y='35' style='font-size:16px; opacity:0.12;'%3E🦒%3C/text%3E%3Ctext x='100' y='35' style='font-size:14px; opacity:0.12;'%3E🔴%3C/text%3E%3Ctext x='130' y='35' style='font-size:16px; opacity:0.12;'%3E🦒%3C/text%3E%3Ctext x='160' y='35' style='font-size:14px; opacity:0.12;'%3E🔴%3C/text%3E%3Ctext x='195' y='35' style='font-size:15px; opacity:0.15;'%3E🟣%3C/text%3E%3C/svg%3E");
+            color: var(--text); 
+            padding-bottom: 50px; 
+        }
+        
+        /* MENU DO TOPO */
+        .nav-container { max-width: 900px; margin: 20px auto; padding: 0 20px; }
+        .tabs-nav { display: flex; justify-content: space-around; background: var(--card-bg); padding: 10px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow-x: auto; }
+        .tab-link { text-decoration: none; padding: 10px 20px; font-weight: bold; color: #636e72; border-radius: 20px; transition: 0.3s; white-space: nowrap; font-family: 'Segoe UI', sans-serif; }
+        .tab-link.active { background: var(--primary); color: white; }
+        
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        
+        .pokedex-title {
+            text-align: center; background: var(--poke-red); color: white; padding: 15px;
+            border: 4px solid #000; border-radius: 10px; margin-bottom: 40px;
+            box-shadow: 4px 4px 0px #000; text-transform: uppercase; letter-spacing: 2px;
+        }
+
+        h2.section-divider {
+            text-align: center; margin: 40px 0 20px 0; font-weight: bold;
+            text-transform: uppercase; background: #000; color: #fff; padding: 8px;
+            border-radius: 5px; font-size: 1.2rem;
+        }
+
+        /* --- SEÇÃO DE TIMES (LAYOUT SOLICITADO) --- */
+        .teams-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-bottom: 50px; }
+        @media(min-width: 750px) { .teams-grid { grid-template-columns: 1fr 1fr; } }
+
+        .team-box {
+            background: #dfe6e9; border: 4px solid #000; border-radius: 15px;
+            padding: 30px 20px 20px 20px; box-shadow: 6px 6px 0px #000;
+            position: relative; display: flex; flex-direction: column; align-items: center;
+        }
+
+        /* PINS NAS PONTAS */
+        .pin-girafa { position: absolute; top: -10px; left: -10px; font-size: 24px; transform: rotate(-15px); }
+        .pin-pokebola { position: absolute; bottom: -10px; right: -10px; font-size: 20px; }
+
+        .team-box h3 {
+            font-size: 1.4rem; text-transform: uppercase; margin-bottom: 20px;
+            border-bottom: 3px solid #000; width: 100%; text-align: center; padding-bottom: 5px;
+        }
+
+        /* GRADE 2 LINHAS X 3 COLUNAS */
+        .pokemon-slots {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr); gap: 15px; width: 100%;
+        }
+
+        .slot {
+            background: #fff; border: 3px solid #000; border-radius: 8px;
+            height: 90px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; position: relative;
+            cursor: pointer; transition: transform 0.2s, background-color 0.2s;
+        }
+
+        /* ANIMAÇÃO DE PULO DO POKÉMON E MUDANÇA DE COR */
+        .slot:hover {
+            transform: translateY(-8px);
+            background: var(--primary-light);
+        }
+
+        /* MONSTRINHO EM PIXEL PLACEHOLDER */
+        .slot-sprite { font-size: 28px; transition: transform 0.1s; }
+        .slot:hover .slot-sprite { transform: scale(1.1); }
+
+        /* TEXTO DO NOME EXIBIDO AO PASSAR O MOUSE */
+        .poke-name {
+            font-size: 10px; font-weight: bold; text-transform: uppercase;
+            margin-top: 5px; text-align: center; color: #000;
+            max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        }
+
+        /* --- SEÇÃO DE MOMENTOS (ESTILO FLASHES ALTERNADOS) --- */
+        .flash-card { 
+            display: flex; flex-direction: column; background: var(--card-bg); 
+            border-radius: 20px; box-shadow: 0 6px 20px rgba(0,0,0,0.04); 
+            margin-bottom: 35px; overflow: hidden; border: 2px solid #e1e2ef;
+        }
+        @media(min-width: 650px) {
+            .flash-card { flex-direction: row; }
+            .flash-card:nth-child(even) { flex-direction: row-reverse; }
+        }
+        .photo-area { position: relative; flex: 1; min-height: 250px; background: #cbd5e1; }
+        .photo-area img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .text-area { flex: 1; padding: 30px; display: flex; flex-direction: column; justify-content: center; }
+        .text-area h3 { color: var(--primary); font-size: 1.35rem; margin-bottom: 12px; font-weight: 700; }
+        .text-area p { color: #4b5563; line-height: 1.6; font-size: 0.98rem; }
+        .corner-ball { position: absolute; bottom: 12px; right: 12px; font-size: 18px; }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA DE NAVEGAÇÃO -->
+    <div class="nav-container">
+        <nav class="tabs-nav">
+            <a href="index.html" class="tab-link">Início</a>
+            <a href="fotos.html" class="tab-link">Nossos Flashes</a>
+            <a href="sorrisos.html" class="tab-link">Sorrisos do Luca</a>
+            <a href="pokedex.html" class="tab-link active">PokeDex</a>
+            <a href="cartas.html" class="tab-link">Cartas para Você</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        
+        <div class="pokedex-title">
+            <h2>Cobbleverse Trainer Index</h2>
+        </div>
+
+        <!-- ================= SEÇÃO DE TIMES ================= -->
+        <h2 class="section-divider">Nossos Times Regionais</h2>
+        
+        <div class="teams-grid">
+            
+            <!-- KANTO -->
+            <div class="team-box">
+                <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
+                <h3>Kanto</h3>
+                <div class="pokemon-slots">
+                    <div class="slot"><div class="slot-sprite">🍃</div><div class="poke-name">Leafeon</div></div>
+                    <div class="slot"><div class="slot-sprite">⚡</div><div class="poke-name">Pachirisu</div></div>
+                    <div class="slot"><div class="slot-sprite">⚔️</div><div class="poke-name">Gallade</div></div>
+                    <div class="slot"><div class="slot-sprite">🦒</div><div class="poke-name">Farigiraf</div></div>
+                    <div class="slot"><div class="slot-sprite">🔥</div><div class="poke-name">Charizard</div></div>
+                    <div class="slot"><div class="slot-sprite">🐧</div><div class="poke-name">Empoleon</div></div>
+                </div>
+            </div>
+
+            <!-- JOHTO -->
+            <div class="team-box">
+                <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
+                <h3>Johto</h3>
+                <div class="pokemon-slots">
+                    <div class="slot"><div class="slot-sprite">🌸</div><div class="poke-name">Meganium</div></div>
+                    <div class="slot"><div class="slot-sprite">🌋</div><div class="poke-name">Typhlosion</div></div>
+                    <div class="slot"><div class="slot-sprite">🔮</div><div class="poke-name">Espeon ✨</div></div>
+                    <div class="slot"><div class="slot-sprite">🐉</div><div class="poke-name">Kingdra</div></div>
+                    <div class="slot"><div class="slot-sprite">🦖</div><div class="poke-name">Tyranitar</div></div>
+                    <div class="slot"><div class="slot-sprite">🪲</div><div class="poke-name">Heracross</div></div>
+                </div>
+            </div>
+
+            <!-- HOENN -->
+            <div class="team-box">
+                <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
+                <h3>Hoenn</h3>
+                <div class="pokemon-slots">
+                    <div class="slot"><div class="slot-sprite">🦎</div><div class="poke-name">Sceptile</div></div>
+                    <div class="slot"><div class="slot-sprite">🐲</div><div class="poke-name">Flygon</div></div>
+                    <div class="slot"><div class="slot-sprite">🦋</div><div class="poke-name">Beautifly</div></div>
+                    <div class="slot"><div class="slot-sprite">🧘</div><div class="poke-name">Medicham</div></div>
+                    <div class="slot"><div class="slot-sprite">🧚</div><div class="poke-name">Mawile</div></div>
+                    <div class="slot"><div class="slot-sprite">🦈</div><div class="poke-name">Sharpedo</div></div>
+                </div>
+            </div>
+
+            <!-- SINNOH -->
+            <div class="team-box">
+                <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
+                <h3>Sinnoh</h3>
+                <div class="pokemon-slots">
+                    <div class="slot"><div class="slot-sprite">🐒</div><div class="poke-name">Infernape</div></div>
+                    <div class="slot"><div class="slot-sprite">🦈</div><div class="poke-name">Garchomp</div></div>
+                    <div class="slot"><div class="slot-sprite">🕊️</div><div class="poke-name">Togekiss</div></div>
+                    <div class="slot"><div class="slot-sprite">🌹</div><div class="poke-name">Roserade</div></div>
+                    <div class="slot"><div class="slot-sprite">👻</div><div class="poke-name">Froslass</div></div>
+                    <div class="slot"><div class="slot-sprite">🦦</div><div class="poke-name">Floatzel</div></div>
+                </div>
+            </div>
+
+            <!-- UNOVA -->
+            <div class="team-box" style="opacity: 0.85;">
+                <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
+                <h3>Unova (COMING SOON)</h3>
+                <div class="pokemon-slots">
+                    <div class="slot"><div class="slot-sprite">🐍</div><div class="poke-name">Serperior</div></div>
+                    <div class="slot"><div class="slot-sprite">🦢</div><div class="poke-name">Swanna</div></div>
+                    <div class="slot"><div class="slot-sprite">🕯️</div><div class="poke-name">Chandelure</div></div>
+                    <div class="slot"><div class="slot-sprite">🦫</div><div class="poke-name">Excadrill</div></div>
+                    <div class="slot"><div class="slot-sprite">🐭</div><div class="poke-name">Cinccino</div></div>
+                    <div class="slot"><div class="slot-sprite">🥋</div><div class="poke-name">Mienshao</div></div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- ================= SEÇÃO DE MOMENTOS ================= -->
+        <h2 class="section-divider">Nossos Momentos — 14 Screenshots</h2>
+
+        <!-- MOMENTO 1 -->
+        <div class="flash-card">
+            <div class="photo-area"><img src="poke1.jpg" alt="Print 1"><div class="corner-ball">🔴</div></div>
+            <div class="text-area"><h3>Momento #01</h3><p>Edite o texto do print aqui.</p></div>
+        </div>
+
+        <!-- MOMENTO 2 -->
+        <div class="flash-card">
+            <div class="photo-area"><img src="poke2.jpg" alt="Print 2"><div class="corner-ball">🔴</div></div>
+            <div class="text-area"><h3>Momento #02</h3><p>Edite o texto do print aqui.</p></div>
+        </div>
+
+        <!-- MOMENTO 3 -->
+        <div class="flash-card">
+            <div class="photo-area"><img src="poke3.jpg" alt="Print 3"><div class="corner-ball">🔴</div></div>
+            <div class="text-area"><h3>Momento #03</h3><p>Edite o texto do print aqui.</p></div>
+        </div>
+
+        <!-- MOMENTO 4 -->
+        <div class="flash-card">
+            <div class="photo-area"><img src="poke4.jpg" alt="Print 4"><div class="corner-ball">🔴</div></div>
+            <div class="text-area"><h3>Momento #04</h3><p>Edite o texto do print aqui.</p></div>
+        </div>
+
+        <!-- MOMENTO 5 -->
+        <div class="flash-card">
+            <div class="photo-area"><img src="poke5.jpg" alt="Print 5"><div class="corner-ball">🔴</div></div>
+            <div class="text-area"><h3>Momento #05</h3><p>Edite o texto do print aqui.</p></div>
+        </div>
+
+        <!-- MOMENTO 6 -->
+        <div class="flash-card">
+            <div class="photo-area"><img src="poke6.jpg" alt="Print 6"><div class="corner-ball">🔴</div></div>
+            <div class="text-area"><h3>Momento #06</h3><p>Edite o texto do print aqui.</p></div>
+        </div>
+
+        <!-- MOMENTO 7 -->
+        <div class="flash-card">
+            <div class="photo-area"><img src="poke7.jpg" alt="Print 7"><div class="corner-ball">🔴</div></div>
+            <div class="text-area"><h3>Momento #07</h3><p>Edite o texto do print aqui.</p></div>
+        </div>
+
+        <!-- MOMENTO 8 -->
+        <div class="flash-card">
+            <div class="photo-area"><img src="poke8.jpg" alt="Print 8"><div class="corner-ball">🔴</div></div>
+            <div class="text-area"><h3>Momento #08</h3><p>Edite o texto do print aqui.</p></div>
+        </div>
+
+        <!-- MOMENTO 9 -->
+        <div class="flash-card">
+            <div class="photo-area"><img src="poke9.jpg" alt="Print 9"><div class="corner-ball">🔴</div></div>
+            <div class="text-area"><h3>Momento #09</h3><p>Edite o texto do print aqui.</p></div>
+        </div>
+
+        <!-- MOMENTO 10 -->
+        <div class="flash-card">
+            <div class="photo-area"><img src="poke10.jpg" alt="Print 10"><div class="corner-ball">🔴</div></div>
+            <div class="text-area"><h3>Momento #10</h3><p>Edite o texto do print aqui.</p></div>
+        </div>
+
+        <!-- MOMENTO 11 -->
+        <div class="flash-card">
+            <div class="photo-area"><img src="poke11.jpg" alt="Print 11"><div class="corner-ball">🔴</div></div>
+            <div class="text-area"><h3>Momento #11</h3><p>Edite o texto do print aqui.</p></div>
+        </div>
+
+        <!-- MOMENTO 12 -->
+        <div class="flash-card">
+            <div class="photo-area"><img src="poke12.jpg" alt="Print 12"><div class="corner-ball">🔴</div></div>
+            <div class="text-area"><h3>Momento #12</h3><p>Edite o texto do print aqui.</p></div>
+        </div>
+
+        <!-- MOMENTO 13 -->
+        <div class="flash-card">
+            <div class="photo-area"><img src="poke13.jpg" alt="Print 13"><div class="corner-ball">🔴</div></div>
+            <div class="text-area"><h3>Momento #13</h3><p>Edite o texto do print aqui.</p></div>
+        </div>
+
+        <!-- MOMENTO 14 -->
+        <div class="flash-card">
+            <div class="photo-area"><img src="poke14.jpg" alt="Print 14"><div class="corner-ball">🔴</div></div>
+            <div class="text-area"><h3>Momento #14</h3><p>Edite o texto do print aqui.</p></div>
+        </div>
+
+    </div>
+
+</body>
+</html>
