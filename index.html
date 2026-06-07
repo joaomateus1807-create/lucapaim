@@ -116,7 +116,7 @@
         /* ESTILO DO CRONÔMETRO */
         .timer-display {
             font-family: 'Courier New', Courier, monospace;
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             color: var(--primary);
             font-weight: bold;
             letter-spacing: 0.5px;
@@ -176,11 +176,19 @@
                     </div>
                 </div>
 
-                <!-- CRONÔMETRO AUTOMÁTICO (PLAYTIME DO SERVIDOR) -->
+                <!-- PLAYTIME 1: DESDE QUE SE CONHECERAM -->
                 <div class="status-item" style="grid-column: 1 / -1;">
-                    <div class="status-label">Tempo de Jogo (Playtime Juntos)</div>
-                    <div class="status-value timer-display" id="cronometro">
-                        00d 00h 00m 00s
+                    <div class="status-label">Tempo de Jogo (Desde que nos conhecemos)</div>
+                    <div class="status-value timer-display" id="tempoConhecemos">
+                        0000 dias
+                    </div>
+                </div>
+
+                <!-- PLAYTIME 2: TEMPO DE NAMORO -->
+                <div class="status-item" style="grid-column: 1 / -1;">
+                    <div class="status-label">Tempo de Campanha (Tempo de Namoro)</div>
+                    <div class="status-value timer-display" id="tempoNamoro" style="color: #e74c3c;">
+                        0000 dias
                     </div>
                 </div>
 
@@ -210,33 +218,33 @@
 
     </div>
 
-    <!-- CÁLCULO E ATUALIZAÇÃO DO CRONÔMETRO -->
+    <!-- CÁLCULO E ATUALIZAÇÃO DOS CRONÔMETROS -->
     <script>
-        // === ATENÇÃO: COLOQUE A DATA DO INÍCIO DE VOCÊS AQUI ===
-        // Formato: Ano, Mês (0 para Janeiro, 1 para Fevereiro... 11 para Dezembro), Dia, Hora, Minuto
-        // Exemplo abaixo configurado para 12 de Junho de 2024 às 20:00:
-        const dataInicio = new Date(2024, 5, 12, 20, 0, 0);
+        // Datas configuradas com fuso zerado para o cálculo exato de dias corridos
+        const conhecemosData = new Date(2024, 1, 2); // 02 de Fevereiro de 2024
+        const namoroData = new Date(2025, 11, 4);   // 04 de Dezembro de 2025
 
-        function atualizarCronometro() {
+        function calcularDias(dataAlvo) {
             const agora = new Date();
-            const diferenca = agora - dataInicio;
-
-            // Cálculos matemáticos para converter milissegundos em dias, horas, minutos e segundos
-            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
-            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
-
-            // Adiciona um zero à esquerda se o número for menor que 10 para o visual ficar alinhado
-            const formataNum = num => String(num).padStart(2, '0');
-
-            document.getElementById("cronometro").innerHTML = 
-                `${dias}d ${formataNum(horas)}h ${formataNum(minutos)}m ${formataNum(segundos)}s`;
+            
+            // Força o cálculo focado apenas na diferença de datas absolutas (ignorando fuso horário de horário de verão)
+            const utcAgora = Date.UTC(agora.getFullYear(), agora.getMonth(), agora.getDate());
+            const utcalvo = Date.UTC(dataAlvo.getFullYear(), dataAlvo.getMonth(), dataAlvo.getDate());
+            
+            const diferencaMilissegundos = utcAgora - utcalvo;
+            return Math.floor(diferencaMilissegundos / (1000 * 60 * 60 * 24));
         }
 
-        // Executa a função imediatamente e depois atualiza a cada 1 segundo
-        atualizarCronometro();
-        setInterval(atualizarCronometro, 1000);
+        function atualizarPainel() {
+            const diasConhecemos = calcularDias(conhecemosData);
+            const diasNamoro = calcularDias(namoroData);
+
+            document.getElementById("tempoConhecemos").innerHTML = `✨ ${diasConhecemos} dias`;
+            document.getElementById("tempoNamoro").innerHTML = `❤️ ${diasNamoro} dias`;
+        }
+
+        // Inicializa o contador na tela
+        atualizarPainel();
     </script>
 
 </body>
