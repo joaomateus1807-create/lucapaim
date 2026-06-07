@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossos Flashes</title>
+    <style>
+        :root { 
+            --primary: #6c5ce7; 
+            --primary-light: #a29bfe; 
+            --bg: #f8f9fa; 
+            --card-bg: #ffffff; 
+            --text: #2d3436; 
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', -apple-system, sans-serif; }
+        body { background-color: var(--bg); color: var(--text); padding-bottom: 50px; }
+        
+        /* MENU DO TOPO */
+        .nav-container { max-width: 800px; margin: 20px auto; padding: 0 20px; }
+        .tabs-nav { display: flex; justify-content: space-around; background: var(--card-bg); padding: 10px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow-x: auto; }
+        .tab-link { text-decoration: none; padding: 10px 20px; font-weight: bold; color: #636e72; border-radius: 20px; transition: 0.3s; white-space: nowrap; }
+        .tab-link.active { background: var(--primary); color: white; }
+        
+        /* CONTAINER DOS FLASHES */
+        .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        
+        /* CARD DO ESTILO DA IMAGEM DO USUÁRIO (LADO A LADO) */
+        .flash-card { 
+            display: flex; 
+            flex-direction: column; 
+            background: var(--card-bg); 
+            border-radius: 20px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04); 
+            margin-bottom: 35px; 
+            overflow: hidden;
+            border: 2px solid #e1e2ef;
+        }
+        
+        @media(min-width: 650px) {
+            .flash-card { flex-direction: row; }
+            .flash-card:nth-child(even) { flex-direction: row-reverse; } /* Alterna os lados para ficar dinâmico */
+        }
+
+        /* MOLDURA DA FOTO COM DETALHE RETRO/PIXEL */
+        .photo-area { 
+            position: relative;
+            flex: 1; 
+            min-height: 250px;
+            background: #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .photo-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* DETALHE DA GIRAFA EM PIXEL ART (USANDO CARACTERE / DESIGN RETRO) */
+        .girafa-pixel {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: #f1f2f6;
+            border: 2px solid #2d3436;
+            padding: 4px 8px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 5px;
+            color: #e67e22;
+            font-family: monospace;
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        /* ÁREA DA DESCRIÇÃO */
+        .text-area { 
+            flex: 1; 
+            padding: 30px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+        }
+        
+        .text-area h3 { 
+            color: var(--primary); 
+            font-size: 1.4rem; 
+            margin-bottom: 10px; 
+            font-weight: 700;
+        }
+        
+        .text-area p { 
+            color: #4b5563; 
+            line-height: 1.6; 
+            font-size: 1rem; 
+        }
+        
+        .placeholder-text {
+            color: #94a3b8;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA DE NAVEGAÇÃO -->
+    <div class="nav-container">
+        <nav class="tabs-nav">
+            <a href="index.html" class="tab-link">Início</a>
+            <a href="fotos.html" class="tab-link active">Nossos Flashes</a>
+            <a href="sorrisos.html" class="tab-link">Sorrisos do Luca</a>
+            <a href="pokedex.html" class="tab-link">PokeDex</a>
+            <a href="cartas.html" class="tab-link">Cartas para Você</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        
+        <!-- FOTO FAVORITA 1 -->
+        <div class="flash-card">
+            <div class="photo-area">
+                <!-- Substitua 'link_da_sua_foto_1.jpg' pelo link ou nome da foto depois -->
+                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500" alt="Nossa Foto">
+                <div class="girafa-pixel">🦒 PIXEL</div>
+            </div>
+            <div class="text-area">
+                <h3>O Início de Tudo</h3>
+                <p>Escreva aqui a descrição detalhada dessa foto favorita. Conte onde vocês estavam, o que aconteceu nesse dia e por que esse momento se tornou tão especial para você.</p>
+            </div>
+        </div>
+
+        <!-- FOTO FAVORITA 2 -->
+        <div class="flash-card">
+            <div class="photo-area">
+                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500" alt="Nossa Foto">
+                <div class="girafa-pixel">🦒 PIXEL</div>
+            </div>
+            <div class="text-area">
+                <h3>Nossa Primeira Viagem</h3>
+                <p>Coloque a história da segunda foto favorita aqui. O layout vai inverter automaticamente o lado da imagem no computador para o design não ficar cansativo.</p>
+            </div>
+        </div>
+
+        <!-- FOTO FAVORITA 3 -->
+        <div class="flash-card">
+            <div class="photo-area">
+                <img src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=500" alt="Nossa Foto">
+                <div class="girafa-pixel">🦒 PIXEL</div>
+            </div>
+            <div class="text-area">
+                <h3>Aquele Encontro Especial</h3>
+                <p>História da terceira foto favorita aqui. Você pode replicar essa estrutura de blocos facilmente para colocar as suas 10 fotos preferidas.</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
