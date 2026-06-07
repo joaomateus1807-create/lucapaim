@@ -38,7 +38,7 @@
         .welcome-box h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; color: var(--text); }
         .welcome-box p { color: #636e72; font-size: 1.1rem; }
 
-        /* --- PAINEL DO TREINADOR / STATUS (SUA IDEIA 2) --- */
+        /* PAINEL DO TREINADOR / STATUS */
         .status-panel {
             background: var(--card-bg);
             border: 3px solid #2d3436;
@@ -113,6 +113,15 @@
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
         }
 
+        /* ESTILO DO CRONÔMETRO */
+        .timer-display {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.25rem;
+            color: var(--primary);
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
         /* FRASE INFERIOR DE INTRODUÇÃO */
         .intro-phrase {
             font-style: italic;
@@ -167,6 +176,14 @@
                     </div>
                 </div>
 
+                <!-- CRONÔMETRO AUTOMÁTICO (PLAYTIME DO SERVIDOR) -->
+                <div class="status-item" style="grid-column: 1 / -1;">
+                    <div class="status-label">Tempo de Jogo (Playtime Juntos)</div>
+                    <div class="status-value timer-display" id="cronometro">
+                        00d 00h 00m 00s
+                    </div>
+                </div>
+
                 <!-- META ATUAL -->
                 <div class="status-item" style="grid-column: 1 / -1;">
                     <div class="status-label">Meta Atual do Jogo</div>
@@ -192,6 +209,35 @@
         </p>
 
     </div>
+
+    <!-- CÁLCULO E ATUALIZAÇÃO DO CRONÔMETRO -->
+    <script>
+        // === ATENÇÃO: COLOQUE A DATA DO INÍCIO DE VOCÊS AQUI ===
+        // Formato: Ano, Mês (0 para Janeiro, 1 para Fevereiro... 11 para Dezembro), Dia, Hora, Minuto
+        // Exemplo abaixo configurado para 12 de Junho de 2024 às 20:00:
+        const dataInicio = new Date(2024, 5, 12, 20, 0, 0);
+
+        function atualizarCronometro() {
+            const agora = new Date();
+            const diferenca = agora - dataInicio;
+
+            // Cálculos matemáticos para converter milissegundos em dias, horas, minutos e segundos
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+
+            // Adiciona um zero à esquerda se o número for menor que 10 para o visual ficar alinhado
+            const formataNum = num => String(num).padStart(2, '0');
+
+            document.getElementById("cronometro").innerHTML = 
+                `${dias}d ${formataNum(horas)}h ${formataNum(minutos)}m ${formataNum(segundos)}s`;
+        }
+
+        // Executa a função imediatamente e depois atualiza a cada 1 segundo
+        atualizarCronometro();
+        setInterval(atualizarCronometro, 1000);
+    </script>
 
 </body>
 </html>
