@@ -3,46 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luca Paim</title>
+    <title>Mundo de Nós Dois</title>
     <style>
         :root { 
             --primary: #6c5ce7; 
             --primary-light: #a29bfe; 
-            --bg: #f8f9fa; 
+            --bg: #f1f2f6; 
             --card-bg: #ffffff; 
             --text: #2d3436; 
+            --green: #2ecc71;
+            --amber: #f1c40f;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', -apple-system, sans-serif; }
         
-        /* PLANO DE FUNDO ESTILO WALLPAPER DE GIRAFA RETRO */
+        /* PLANO DE FUNDO PADRÃO DO SITE */
         body { 
-            background-color: #f1f2f6; 
-            /* Padrão repetido de girafinhas idêntico ao da página de flashes */
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ctext x='15' y='35' style='font-size:16px; opacity: 0.12; font-family:monospace;'%3E🦒%3C/text%3E%3C/svg%3E");
+            background-color: var(--bg); 
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ctext x='15' y='35' style='font-size:16px; opacity: 0.12;'%3E🦒%3C/text%3E%3C/svg%3E");
             color: var(--text); 
             padding-bottom: 50px; 
         }
         
         /* MENU DO TOPO */
-        .nav-container { max-width: 800px; margin: 20px auto; padding: 0 20px; }
+        .nav-container { max-width: 900px; margin: 20px auto; padding: 0 20px; }
         .tabs-nav { display: flex; justify-content: space-around; background: var(--card-bg); padding: 10px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow-x: auto; }
         .tab-link { text-decoration: none; padding: 10px 20px; font-weight: bold; color: #636e72; border-radius: 20px; transition: 0.3s; white-space: nowrap; }
         .tab-link.active { background: var(--primary); color: white; }
         
-        /* HEADER */
-        header { text-align: center; padding: 50px 20px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 40px; }
-        header h1 { font-size: 2.5rem; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
-        header p { font-size: 1.1rem; opacity: 0.9; }
-
-        /* CRONÔMETROS */
-        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
-        .timers-container { display: grid; grid-template-columns: 1fr; gap: 25px; margin-bottom: 30px; }
-        @media(min-width: 600px) { .timers-container { grid-template-columns: 1fr 1fr; } }
+        /* CONTAINER PRINCIPAL */
+        .container { max-width: 800px; margin: 40px auto; padding: 0 20px; text-align: center; }
         
-        .timer-card { background: var(--card-bg); padding: 35px 20px; border-radius: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 2px solid #e1e2ef; transition: 0.3s; }
-        .timer-card:hover { border-color: var(--primary-light); transform: translateY(-2px); }
-        .timer-card h3 { font-size: 0.95rem; color: var(--primary); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
-        .timer-display { font-size: 1.3rem; font-weight: bold; color: #2d3436; line-height: 1.4; }
+        /* BOAS-VINDAS */
+        .welcome-box { margin-bottom: 40px; }
+        .welcome-box h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; color: var(--text); }
+        .welcome-box p { color: #636e72; font-size: 1.1rem; }
+
+        /* --- PAINEL DO TREINADOR / STATUS (SUA IDEIA 2) --- */
+        .status-panel {
+            background: var(--card-bg);
+            border: 3px solid #2d3436;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 6px 6px 0px #2d3436;
+            text-align: left;
+            margin-bottom: 40px;
+        }
+
+        .panel-header {
+            font-family: 'Courier New', monospace;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 3px double #2d3436;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            color: var(--primary);
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media(min-width: 600px) {
+            .status-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        .status-item {
+            background: #f8f9fa;
+            border: 2px solid #2d3436;
+            border-radius: 8px;
+            padding: 15px;
+            position: relative;
+        }
+
+        .status-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .status-value {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Badge de Status Online/Conectado */
+        .badge-online {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(46, 204, 113, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+        }
+
+        /* FRASE INFERIOR DE INTRODUÇÃO */
+        .intro-phrase {
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 1rem;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -58,54 +136,62 @@
         </nav>
     </div>
 
-    <!-- CABEÇALHO -->
-    <header>
-        <h1>Feliz Dia dos Namorados!</h1>
-        <p>Para o dono do meu sorriso mais bonito</p>
-    </header>
-
-    <!-- CONTAINER DOS CRONÔMETROS -->
     <div class="container">
-        <div class="timers-container">
-            <div class="timer-card">
-                <h3>Desde o primeiro Oie</h3>
-                <div id="tempo-conhecemos" class="timer-display">Calculando...</div>
+        
+        <!-- BOAS-VINDAS -->
+        <div class="welcome-box">
+            <h1>Nosso Servidor Privado</h1>
+            <p>O cantinho especial feito para o melhor namorado do mundo.</p>
+        </div>
+
+        <!-- PAINEL DE STATUS INTERATIVO -->
+        <div class="status-panel">
+            <div class="panel-header">
+                <span>CONNECTION STATUS</span>
+                <span>v1.0.0</span>
             </div>
-            <div class="timer-card">
-                <h3>Nosso Namoro</h3>
-                <div id="tempo-namoro" class="timer-display">Calculando...</div>
+            
+            <div class="status-grid">
+                
+                <!-- LOCALIZAÇÃO -->
+                <div class="status-item">
+                    <div class="status-label">Servidor Local</div>
+                    <div class="status-value">Belo Horizonte ⇆ Salvador</div>
+                </div>
+
+                <!-- LINK STATUS -->
+                <div class="status-item">
+                    <div class="status-label">Status do Link</div>
+                    <div class="status-value">
+                        <span class="badge-online"></span> Conectados à Distância
+                    </div>
+                </div>
+
+                <!-- META ATUAL -->
+                <div class="status-item" style="grid-column: 1 / -1;">
+                    <div class="status-label">Meta Atual do Jogo</div>
+                    <div class="status-value" style="color: #d35400;">
+                        💍 Casar com momo em 7 anos
+                    </div>
+                </div>
+
+                <!-- MASCOTES -->
+                <div class="status-item" style="grid-column: 1 / -1;">
+                    <div class="status-label">Mascotes Autorizados do Servidor</div>
+                    <div class="status-value">
+                        <span>🐶 Flor</span> &nbsp;&nbsp;|&nbsp;&nbsp; <span>🐱 Pupu</span>
+                    </div>
+                </div>
+
             </div>
         </div>
+
+        <!-- TEXTO DE DIRECIONAMENTO -->
+        <p class="intro-phrase">
+            Use as abas do menu superior para navegar pelas nossas fotos, ver os seus sorrisos mais bonitos, checar a Pokédex oficial dos nossos times regionais ou abrir as cartas exclusivas que deixei guardadas para você.
+        </p>
+
     </div>
 
-    <script>
-        // DATAS CONFIGURADAS (02/02/2024 e 04/12/2025)
-        const dataPrimeiroOie = new Date(2024, 1, 2);  
-        const dataNamoro      = new Date(2025, 11, 4); 
-
-        function calcularTempo(dataInicio, elementoId) {
-            const agora = new Date();
-            const diferenca = agora - dataInicio;
-
-            if (diferenca < 0) {
-                document.getElementById(elementoId).innerHTML = "Data no futuro!";
-                return;
-            }
-
-            const anos = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365));
-            const meses = Math.floor((diferenca % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
-            const dias = Math.floor((diferenca % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
-
-            document.getElementById(elementoId).innerHTML = 
-                `${anos} anos, ${meses} meses e ${dias} dias`;
-        }
-
-        function atualizar() {
-            calcularTempo(dataPrimeiroOie, "tempo-conhecemos");
-            calcularTempo(dataNamoro, "tempo-namoro");
-        }
-
-        document.addEventListener("DOMContentLoaded", atualizar);
-    </script>
 </body>
 </html>
