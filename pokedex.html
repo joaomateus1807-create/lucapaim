@@ -44,7 +44,7 @@
             border-radius: 5px; font-size: 1.2rem;
         }
 
-        /* --- SEÇÃO DE TIMES (LAYOUT SOLICITADO) --- */
+        /* --- SEÇÃO DE TIMES --- */
         .teams-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-bottom: 50px; }
         @media(min-width: 750px) { .teams-grid { grid-template-columns: 1fr 1fr; } }
 
@@ -54,8 +54,7 @@
             position: relative; display: flex; flex-direction: column; align-items: center;
         }
 
-        /* PINS NAS PONTAS */
-        .pin-girafa { position: absolute; top: -10px; left: -10px; font-size: 24px; transform: rotate(-15px); }
+        .pin-girafa { position: absolute; top: -10px; left: -10px; font-size: 24px; transform: rotate(-15deg); }
         .pin-pokebola { position: absolute; bottom: -10px; right: -10px; font-size: 20px; }
 
         .team-box h3 {
@@ -63,7 +62,6 @@
             border-bottom: 3px solid #000; width: 100%; text-align: center; padding-bottom: 5px;
         }
 
-        /* GRADE 2 LINHAS X 3 COLUNAS */
         .pokemon-slots {
             display: grid; grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(2, 1fr); gap: 15px; width: 100%;
@@ -71,29 +69,34 @@
 
         .slot {
             background: #fff; border: 3px solid #000; border-radius: 8px;
-            height: 90px; display: flex; flex-direction: column;
+            height: 95px; display: flex; flex-direction: column;
             align-items: center; justify-content: center; position: relative;
             cursor: pointer; transition: transform 0.2s, background-color 0.2s;
+            padding: 5px;
         }
 
-        /* ANIMAÇÃO DE PULO DO POKÉMON E MUDANÇA DE COR */
         .slot:hover {
             transform: translateY(-8px);
             background: var(--primary-light);
         }
 
-        /* MONSTRINHO EM PIXEL PLACEHOLDER */
-        .slot-sprite { font-size: 28px; transition: transform 0.1s; }
-        .slot:hover .slot-sprite { transform: scale(1.1); }
+        .slot img {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+            image-rendering: pixelated; /* Mantém o estilo pixel art nítido */
+            transition: transform 0.1s;
+        }
 
-        /* TEXTO DO NOME EXIBIDO AO PASSAR O MOUSE */
+        .slot:hover img { transform: scale(1.15); }
+
         .poke-name {
-            font-size: 10px; font-weight: bold; text-transform: uppercase;
-            margin-top: 5px; text-align: center; color: #000;
+            font-size: 9px; font-weight: bold; text-transform: uppercase;
+            margin-top: 2px; text-align: center; color: #000;
             max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
         }
 
-        /* --- SEÇÃO DE MOMENTOS (ESTILO FLASHES ALTERNADOS) --- */
+        /* --- SEÇÃO DE MOMENTOS --- */
         .flash-card { 
             display: flex; flex-direction: column; background: var(--card-bg); 
             border-radius: 20px; box-shadow: 0 6px 20px rgba(0,0,0,0.04); 
@@ -104,7 +107,7 @@
             .flash-card:nth-child(even) { flex-direction: row-reverse; }
         }
         .photo-area { position: relative; flex: 1; min-height: 250px; background: #cbd5e1; }
-        .photo-area img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .photo-area img.screenshot { width: 100%; height: 100%; object-fit: cover; display: block; }
         .text-area { flex: 1; padding: 30px; display: flex; flex-direction: column; justify-content: center; }
         .text-area h3 { color: var(--primary); font-size: 1.35rem; margin-bottom: 12px; font-weight: 700; }
         .text-area p { color: #4b5563; line-height: 1.6; font-size: 0.98rem; }
@@ -140,12 +143,12 @@
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
                 <h3>Kanto</h3>
                 <div class="pokemon-slots">
-                    <div class="slot"><div class="slot-sprite">🍃</div><div class="poke-name">Leafeon</div></div>
-                    <div class="slot"><div class="slot-sprite">⚡</div><div class="poke-name">Pachirisu</div></div>
-                    <div class="slot"><div class="slot-sprite">⚔️</div><div class="poke-name">Gallade</div></div>
-                    <div class="slot"><div class="slot-sprite">🦒</div><div class="poke-name">Farigiraf</div></div>
-                    <div class="slot"><div class="slot-sprite">🔥</div><div class="poke-name">Charizard</div></div>
-                    <div class="slot"><div class="slot-sprite">🐧</div><div class="poke-name">Empoleon</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/470.png" alt="Leafeon"><div class="poke-name">Leafeon</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/417.png" alt="Pachirisu"><div class="poke-name">Pachirisu</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/475.png" alt="Gallade"><div class="poke-name">Gallade</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/981.png" alt="Farigiraf"><div class="poke-name">Farigiraf</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/6.png" alt="Charizard"><div class="poke-name">Charizard</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/395.png" alt="Empoleon"><div class="poke-name">Empoleon</div></div>
                 </div>
             </div>
 
@@ -154,12 +157,12 @@
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
                 <h3>Johto</h3>
                 <div class="pokemon-slots">
-                    <div class="slot"><div class="slot-sprite">🌸</div><div class="poke-name">Meganium</div></div>
-                    <div class="slot"><div class="slot-sprite">🌋</div><div class="poke-name">Typhlosion</div></div>
-                    <div class="slot"><div class="slot-sprite">🔮</div><div class="poke-name">Espeon ✨</div></div>
-                    <div class="slot"><div class="slot-sprite">🐉</div><div class="poke-name">Kingdra</div></div>
-                    <div class="slot"><div class="slot-sprite">🦖</div><div class="poke-name">Tyranitar</div></div>
-                    <div class="slot"><div class="slot-sprite">🪲</div><div class="poke-name">Heracross</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/154.png" alt="Meganium"><div class="poke-name">Meganium</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/157.png" alt="Typhlosion"><div class="poke-name">Typhlosion</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/shiny/196.png" alt="Espeon Shiny"><div class="poke-name">Espeon ✨</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/230.png" alt="Kingdra"><div class="poke-name">Kingdra</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/248.png" alt="Tyranitar"><div class="poke-name">Tyranitar</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/214.png" alt="Heracross"><div class="poke-name">Heracross</div></div>
                 </div>
             </div>
 
@@ -168,12 +171,12 @@
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
                 <h3>Hoenn</h3>
                 <div class="pokemon-slots">
-                    <div class="slot"><div class="slot-sprite">🦎</div><div class="poke-name">Sceptile</div></div>
-                    <div class="slot"><div class="slot-sprite">🐲</div><div class="poke-name">Flygon</div></div>
-                    <div class="slot"><div class="slot-sprite">🦋</div><div class="poke-name">Beautifly</div></div>
-                    <div class="slot"><div class="slot-sprite">🧘</div><div class="poke-name">Medicham</div></div>
-                    <div class="slot"><div class="slot-sprite">🧚</div><div class="poke-name">Mawile</div></div>
-                    <div class="slot"><div class="slot-sprite">🦈</div><div class="poke-name">Sharpedo</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/254.png" alt="Sceptile"><div class="poke-name">Sceptile</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/330.png" alt="Flygon"><div class="poke-name">Flygon</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/267.png" alt="Beautifly"><div class="poke-name">Beautifly</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/308.png" alt="Medicham"><div class="poke-name">Medicham</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/303.png" alt="Mawile"><div class="poke-name">Mawile</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/319.png" alt="Sharpedo"><div class="poke-name">Sharpedo</div></div>
                 </div>
             </div>
 
@@ -182,12 +185,12 @@
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
                 <h3>Sinnoh</h3>
                 <div class="pokemon-slots">
-                    <div class="slot"><div class="slot-sprite">🐒</div><div class="poke-name">Infernape</div></div>
-                    <div class="slot"><div class="slot-sprite">🦈</div><div class="poke-name">Garchomp</div></div>
-                    <div class="slot"><div class="slot-sprite">🕊️</div><div class="poke-name">Togekiss</div></div>
-                    <div class="slot"><div class="slot-sprite">🌹</div><div class="poke-name">Roserade</div></div>
-                    <div class="slot"><div class="slot-sprite">👻</div><div class="poke-name">Froslass</div></div>
-                    <div class="slot"><div class="slot-sprite">🦦</div><div class="poke-name">Floatzel</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/392.png" alt="Infernape"><div class="poke-name">Infernape</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/445.png" alt="Garchomp"><div class="poke-name">Garchomp</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/468.png" alt="Togekiss"><div class="poke-name">Togekiss</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/407.png" alt="Roserade"><div class="poke-name">Roserade</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/478.png" alt="Froslass"><div class="poke-name">Froslass</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/419.png" alt="Floatzel"><div class="poke-name">Floatzel</div></div>
                 </div>
             </div>
 
@@ -196,102 +199,89 @@
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
                 <h3>Unova (COMING SOON)</h3>
                 <div class="pokemon-slots">
-                    <div class="slot"><div class="slot-sprite">🐍</div><div class="poke-name">Serperior</div></div>
-                    <div class="slot"><div class="slot-sprite">🦢</div><div class="poke-name">Swanna</div></div>
-                    <div class="slot"><div class="slot-sprite">🕯️</div><div class="poke-name">Chandelure</div></div>
-                    <div class="slot"><div class="slot-sprite">🦫</div><div class="poke-name">Excadrill</div></div>
-                    <div class="slot"><div class="slot-sprite">🐭</div><div class="poke-name">Cinccino</div></div>
-                    <div class="slot"><div class="slot-sprite">🥋</div><div class="poke-name">Mienshao</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/497.png" alt="Serperior"><div class="poke-name">Serperior</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/581.png" alt="Swanna"><div class="poke-name">Swanna</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/609.png" alt="Chandelure"><div class="poke-name">Chandelure</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/530.png" alt="Excadrill"><div class="poke-name">Excadrill</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/573.png" alt="Cinccino"><div class="poke-name">Cinccino</div></div>
+                    <div class="slot"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/620.png" alt="Mienshao"><div class="poke-name">Mienshao</div></div>
                 </div>
             </div>
 
         </div>
 
 
-        <!-- ================= SEÇÃO DE MOMENTOS ================= -->
+        <!-- ================= SEÇÃO DE MOMENTOS (14 SLOTS) ================= -->
         <h2 class="section-divider">Nossos Momentos — 14 Screenshots</h2>
 
-        <!-- MOMENTO 1 -->
+        <!-- Os blocos abaixo buscam as fotos poke1.jpg até poke14.jpg que você vai subir -->
         <div class="flash-card">
-            <div class="photo-area"><img src="poke1.jpg" alt="Print 1"><div class="corner-ball">🔴</div></div>
+            <div class="photo-area"><img src="poke1.jpg" alt="Print 1" class="screenshot"><div class="corner-ball">🔴</div></div>
             <div class="text-area"><h3>Momento #01</h3><p>Edite o texto do print aqui.</p></div>
         </div>
 
-        <!-- MOMENTO 2 -->
         <div class="flash-card">
-            <div class="photo-area"><img src="poke2.jpg" alt="Print 2"><div class="corner-ball">🔴</div></div>
+            <div class="photo-area"><img src="poke2.jpg" alt="Print 2" class="screenshot"><div class="corner-ball">🔴</div></div>
             <div class="text-area"><h3>Momento #02</h3><p>Edite o texto do print aqui.</p></div>
         </div>
 
-        <!-- MOMENTO 3 -->
         <div class="flash-card">
-            <div class="photo-area"><img src="poke3.jpg" alt="Print 3"><div class="corner-ball">🔴</div></div>
+            <div class="photo-area"><img src="poke3.jpg" alt="Print 3" class="screenshot"><div class="corner-ball">🔴</div></div>
             <div class="text-area"><h3>Momento #03</h3><p>Edite o texto do print aqui.</p></div>
         </div>
 
-        <!-- MOMENTO 4 -->
         <div class="flash-card">
-            <div class="photo-area"><img src="poke4.jpg" alt="Print 4"><div class="corner-ball">🔴</div></div>
+            <div class="photo-area"><img src="poke4.jpg" alt="Print 4" class="screenshot"><div class="corner-ball">🔴</div></div>
             <div class="text-area"><h3>Momento #04</h3><p>Edite o texto do print aqui.</p></div>
         </div>
 
-        <!-- MOMENTO 5 -->
         <div class="flash-card">
-            <div class="photo-area"><img src="poke5.jpg" alt="Print 5"><div class="corner-ball">🔴</div></div>
+            <div class="photo-area"><img src="poke5.jpg" alt="Print 5" class="screenshot"><div class="corner-ball">🔴</div></div>
             <div class="text-area"><h3>Momento #05</h3><p>Edite o texto do print aqui.</p></div>
         </div>
 
-        <!-- MOMENTO 6 -->
         <div class="flash-card">
-            <div class="photo-area"><img src="poke6.jpg" alt="Print 6"><div class="corner-ball">🔴</div></div>
+            <div class="photo-area"><img src="poke6.jpg" alt="Print 6" class="screenshot"><div class="corner-ball">🔴</div></div>
             <div class="text-area"><h3>Momento #06</h3><p>Edite o texto do print aqui.</p></div>
         </div>
 
-        <!-- MOMENTO 7 -->
         <div class="flash-card">
-            <div class="photo-area"><img src="poke7.jpg" alt="Print 7"><div class="corner-ball">🔴</div></div>
+            <div class="photo-area"><img src="poke7.jpg" alt="Print 7" class="screenshot"><div class="corner-ball">🔴</div></div>
             <div class="text-area"><h3>Momento #07</h3><p>Edite o texto do print aqui.</p></div>
         </div>
 
-        <!-- MOMENTO 8 -->
         <div class="flash-card">
-            <div class="photo-area"><img src="poke8.jpg" alt="Print 8"><div class="corner-ball">🔴</div></div>
+            <div class="photo-area"><img src="poke8.jpg" alt="Print 8" class="screenshot"><div class="corner-ball">🔴</div></div>
             <div class="text-area"><h3>Momento #08</h3><p>Edite o texto do print aqui.</p></div>
         </div>
 
-        <!-- MOMENTO 9 -->
         <div class="flash-card">
-            <div class="photo-area"><img src="poke9.jpg" alt="Print 9"><div class="corner-ball">🔴</div></div>
+            <div class="photo-area"><img src="poke9.jpg" alt="Print 9" class="screenshot"><div class="corner-ball">🔴</div></div>
             <div class="text-area"><h3>Momento #09</h3><p>Edite o texto do print aqui.</p></div>
         </div>
 
-        <!-- MOMENTO 10 -->
         <div class="flash-card">
-            <div class="photo-area"><img src="poke10.jpg" alt="Print 10"><div class="corner-ball">🔴</div></div>
+            <div class="photo-area"><img src="poke10.jpg" alt="Print 10" class="screenshot"><div class="corner-ball">🔴</div></div>
             <div class="text-area"><h3>Momento #10</h3><p>Edite o texto do print aqui.</p></div>
         </div>
 
-        <!-- MOMENTO 11 -->
         <div class="flash-card">
-            <div class="photo-area"><img src="poke11.jpg" alt="Print 11"><div class="corner-ball">🔴</div></div>
+            <div class="photo-area"><img src="poke11.jpg" alt="Print 11" class="screenshot"><div class="corner-ball">🔴</div></div>
             <div class="text-area"><h3>Momento #11</h3><p>Edite o texto do print aqui.</p></div>
         </div>
 
-        <!-- MOMENTO 12 -->
         <div class="flash-card">
-            <div class="photo-area"><img src="poke12.jpg" alt="Print 12"><div class="corner-ball">🔴</div></div>
+            <div class="photo-area"><img src="poke12.jpg" alt="Print 12" class="screenshot"><div class="corner-ball">🔴</div></div>
             <div class="text-area"><h3>Momento #12</h3><p>Edite o texto do print aqui.</p></div>
         </div>
 
-        <!-- MOMENTO 13 -->
         <div class="flash-card">
-            <div class="photo-area"><img src="poke13.jpg" alt="Print 13"><div class="corner-ball">🔴</div></div>
+            <div class="photo-area"><img src="poke13.jpg" alt="Print 13" class="screenshot"><div class="corner-ball">🔴</div></div>
             <div class="text-area"><h3>Momento #13</h3><p>Edite o texto do print aqui.</p></div>
         </div>
 
-        <!-- MOMENTO 14 -->
         <div class="flash-card">
-            <div class="photo-area"><img src="poke14.jpg" alt="Print 14"><div class="corner-ball">🔴</div></div>
+            <div class="photo-area"><img src="poke14.jpg" alt="Print 14" class="screenshot"><div class="corner-ball">🔴</div></div>
             <div class="text-area"><h3>Momento #14</h3><p>Edite o texto do print aqui.</p></div>
         </div>
 
