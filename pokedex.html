@@ -51,16 +51,16 @@
             border-bottom: 3px double #fff; padding-bottom: 8px; margin-bottom: 15px;
             text-transform: uppercase; letter-spacing: 1px;
         }
-        .trainer-card-body { display: flex; gap: 15px; }
-        .trainer-info-side { flex: 1.3; font-size: 0.95rem; line-height: 1.8; }
+        .trainer-card-body { display: flex; gap: 15px; align-items: center; }
+        .trainer-info-side { flex: 1.2; font-size: 0.95rem; line-height: 1.8; }
         .trainer-info-side span.label { color: #ffeaa7; font-weight: bold; }
         
         .trainer-avatar-side { 
-            flex: 1; background: #ecf0f1; border: 3px solid #000; 
-            border-radius: 10px; height: 160px; display: flex; 
+            flex: 1.3; background: #ecf0f1; border: 3px solid #000; 
+            border-radius: 10px; height: auto; aspect-ratio: 4/3; display: flex; 
             align-items: center; justify-content: center; overflow: hidden;
         }
-        .trainer-avatar-side img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+        .trainer-avatar-side img { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
 
         h2.section-divider {
             text-align: center; margin: 40px 0 20px 0; font-weight: bold;
@@ -161,7 +161,6 @@
 </head>
 <body>
 
-    <!-- BARRA DE NAVEGAÇÃO -->
     <div class="nav-container">
         <nav class="tabs-nav">
             <a href="index.html" class="tab-link">Início</a>
@@ -178,7 +177,6 @@
             <h2>Cobbleverse Trainer Index</h2>
         </div>
 
-        <!-- ================= FICHA DE TREINADOR ================= -->
         <div class="trainer-card-wrapper">
             <div class="trainer-card-header">Trainer Card</div>
             <div class="trainer-card-body">
@@ -198,11 +196,9 @@
             </div>
         </div>
 
-        <!-- ================= SEÇÃO DE TIMES ================= -->
         <h2 class="section-divider">Times regionais de Luca Paim</h2>
         
         <div class="teams-grid">
-            <!-- KANTO -->
             <div class="team-box">
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
                 <h3>Kanto</h3>
@@ -228,7 +224,7 @@
                         <div class="poke-name">Farigiraf</div>
                     </div>
                     <div class="slot">
-                        <div class="dex-popup"><div class="dex-popup-title">Charizard #06</div><div class="dex-popup-desc">TIPO: Fogo/Voador<br>INFO: Se CHARIZARD ficar furioso, a chama na ponta da cauda se acende em uma cor azul-esbranquiçada..</div></div>
+                        <div class="dex-popup"><div class="dex-popup-title">Charizard #06</div><div class="dex-popup-desc">TIPO: Fogo/Voador<br>INFO: Se CHARIZARD ficar furioso, a chama na ponta da cauda se acende in uma cor azul-esbranquiçada..</div></div>
                         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/6.png" alt="Charizard">
                         <div class="poke-name">Charizard</div>
                     </div>
@@ -240,7 +236,6 @@
                 </div>
             </div>
 
-            <!-- JOHTO -->
             <div class="team-box">
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
                 <h3>Johto</h3>
@@ -278,7 +273,6 @@
                 </div>
             </div>
 
-            <!-- HOENN -->
             <div class="team-box">
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
                 <h3>Hoenn</h3>
@@ -316,7 +310,6 @@
                 </div>
             </div>
 
-            <!-- SINNOH -->
             <div class="team-box">
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
                 <h3>Sinnoh</h3>
@@ -354,7 +347,6 @@
                 </div>
             </div>
 
-            <!-- UNOVA -->
             <div class="team-box" style="opacity: 0.85;">
                 <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
                 <h3>Unova (COMING SOON)</h3>
@@ -369,136 +361,4 @@
                         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/581.png" alt="Swanna">
                         <div class="poke-name">Swanna</div>
                     </div>
-                    <div class="slot">
-                        <div class="dex-popup"><div class="dex-popup-title">Chandelure #609</div><div class="dex-popup-desc">TIPO: Fantasma/Fogo<br>INFO: Ele absorve um espírito, que depois queima. Ao agitar as chamas em seus braços, ele coloca seus inimigos em transe hipnótico.</div></div>
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/609.png" alt="Chandelure">
-                        <div class="poke-name">Chandelure</div>
-                    </div>
-                    <div class="slot">
-                        <div class="dex-popup"><div class="dex-popup-title">Excadrill #530</div><div class="dex-popup-desc">TIPO: Terra/Aço<br>INFO: Pode ajudar na construção de túneis. Sua broca evoluiu para um aço forte o suficiente para perfurar placas de ferro.</div></div>
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/530.png" alt="Excadrill">
-                        <div class="poke-name">Excadrill</div>
-                    </div>
-                    <div class="slot">
-                        <div class="dex-popup"><div class="dex-popup-title">Cinccino #573</div><div class="dex-popup-desc">TIPO: Normal<br>INFO: O óleo que vaza do corpo é realmente suave. Para pessoas afetadas por problemas de pele, este óleo é um tratamento eficaz.</div></div>
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/573.png" alt="Cinccino">
-                        <div class="poke-name">Cinccino</div>
-                    </div>
-                    <div class="slot">
-                        <div class="dex-popup"><div class="dex-popup-title">Mienshao #620</div><div class="dex-popup-desc">TIPO: Lutador<br>INFO: Usando o pelo longo em seus braços como chicotes, ele lança ataques combinados que, uma vez iniciados, ninguém consegue parar.</div></div>
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/620.png" alt="Mienshao">
-                        <div class="poke-name">Mienshao</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= SEÇÃO DE INSÍGNIAS (SISTEMA DE ABAS) ================= -->
-        <h2 class="section-divider">Insígnias Conquistadas</h2>
-        
-        <div class="badge-tabs-container">
-            <div class="folder-tabs">
-                <div class="folder-tab active-folder" onclick="mudarPasta(event, 'kanto-badges')">Kanto</div>
-                <div class="folder-tab" onclick="mudarPasta(event, 'johto-badges')">Johto</div>
-                <div class="folder-tab" onclick="mudarPasta(event, 'hoenn-badges')">Hoenn</div>
-                <div class="folder-tab" onclick="mudarPasta(event, 'sinnoh-badges')">Sinnoh</div>
-            </div>
-            
-            <div class="badges-box">
-                <div class="pin-girafa">🦒</div><div class="pin-pokebola">🔴</div>
-                
-                <!-- CONTEÚDO KANTO -->
-                <div id="kanto-badges" class="badges-content active-content">
-                    <div class="badges-grid">
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia da Rocha</div><div class="dex-popup-desc">LÍDER: Brock<br>INFO: Foi bugado e você ficou mó triste KKKKKK</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/1.png" alt="Rocha"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia da Cascata</div><div class="dex-popup-desc">LÍDER: Misty<br>INFO: Essa procuramos a pedra d'água até morrermos, sendo que tinha no GYM do Brock.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/2.png" alt="Cascata"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia do Trovão</div><div class="dex-popup-desc">LÍDER: Lt. Surge<br>INFO: Você odeia ele KKKKKKKK</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/3.png" alt="Trovão"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia Arco-Íris</div><div class="dex-popup-desc">LÍDER: Erika<br>INFO: Tadinha, a mais fácil e ainda ficamos no resort de maconha dela.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/4.png" alt="Arco-Iris"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia da Alma</div><div class="dex-popup-desc">LÍDER: Koga<br>INFO: Nossa, não lembro aqui, mas na Elite dos 4 o Crobat dele era roubado.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/5.png" alt="Alma"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia do Pântano</div><div class="dex-popup-desc">LÍDER: Sabrina<br>INFO: VADIA, só isso.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/6.png" alt="Pantano"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia do Vulcão</div><div class="dex-popup-desc">LÍDER: Blaine<br>INFO: Quaquaval passou APERTO aqui, pra você ver a ruindade.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/7.png" alt="Vulcão"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Insígnia da Terra</div><div class="dex-popup-desc">LÍDER: Giovanni<br>INFO: Desgraçado em dupla e com o Mewtwo, foi horrível, você levou um susto com o Mewtwo kkkkk</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/8.png" alt="Terra"></div>
-                    </div>
-                </div>
-
-                <!-- CONTEÚDO JOHTO -->
-                <div id="johto-badges" class="badges-content">
-                    <div class="badges-grid">
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Zephyr Badge</div><div class="dex-popup-desc">LÍDER: Falkner<br>INFO: Foi muito fácil né momo.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/9.png" alt="Zephyr"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Hive Badge</div><div class="dex-popup-desc">LÍDER: Bugsy<br>INFO: Foi meio dificil pro Houndoom, mas deu certo.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/10.png" alt="Hive"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Plain Badge</div><div class="dex-popup-desc">LÍDER: Whitney<br>INFO: Miltank vagabunda.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/11.png" alt="Plain"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Fog Badge</div><div class="dex-popup-desc">LÍDER: Morty<br>INFO: Nem lembro, então foi fácil.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/12.png" alt="Fog"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Storm Badge</div><div class="dex-popup-desc">LÍDER: Chuck<br>INFO: Outro que foi fácil e é urso tarado.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/13.png" alt="Storm"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Mineral Badge</div><div class="dex-popup-desc">LÍDER: Jasmine<br>INFO: Fácil e longe.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/14.png" alt="Mineral"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Glacier Badge</div><div class="dex-popup-desc">LÍDER: Pryce<br>INFO: Outro que foi simples.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/15.png" alt="Glacier"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Rising Badge</div><div class="dex-popup-desc">LÍDER: Clair<br>INFO: NOJENTA, SAFADA, IMUNDA</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/16.png" alt="Rising"></div>
-                    </div>
-                </div>
-
-                <!-- CONTEÚDO HOENN -->
-                <div id="hoenn-badges" class="badges-content">
-                    <div class="badges-grid">
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Stone Badge</div><div class="dex-popup-desc">LÍDER: Roxanne<br>INFO: Lembro que ela foi de primeira com o meu Combusken.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/17.png" alt="Stone"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Knuckle Badge</div><div class="dex-popup-desc">LÍDER: Brawly<br>INFO: Não faço ideia o que aconteceu.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/18.png" alt="Knuckle"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Dynamo Badge</div><div class="dex-popup-desc">LÍDER: Wattson<br>INFO: Também não lembro, mas você deve ter passado fácil e eu perrengue.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/19.png" alt="Dynamo"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Heat Badge</div><div class="dex-popup-desc">LÍDER: Flannery<br>INFO: Ludicolo e Flygon deitaram que eu lembro.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/20.png" alt="Heat"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Balance Badge</div><div class="dex-popup-desc">LÍDER: Norman<br>INFO: MEGA BLAZIKEN fez a boa aqui e o seu qual foi?</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/21.png" alt="Balance"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Feather Badge</div><div class="dex-popup-desc">LÍDER: Winona<br>INFO: Ganhar da nossa filha e sequestra-la foi esquisito, talvez?</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/22.png" alt="Feather"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Mind Badge</div><div class="dex-popup-desc">LÍDER: Tate & Liza<br>INFO: Passei raiva, mas ganhamos, lembro que você foi de primeira.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/23.png" alt="Mind"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Rain Badge</div><div class="dex-popup-desc">LÍDER: Wallace<br>INFO: Twunk enjoado esse, mas Ludicolo + Masquerain é impossível dar errado.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/24.png" alt="Rain"></div>
-                    </div>
-                </div>
-
-                <!-- CONTEÚDO SINNOH -->
-                <div id="sinnoh-badges" class="badges-content">
-                    <div class="badges-grid">
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Coal Badge</div><div class="dex-popup-desc">LÍDER: Roark<br>INFO: Pelos prints, Roselia e Roserade deitaram.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/25.png" alt="Coal"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Forest Badge</div><div class="dex-popup-desc">LÍDER: Gardenia<br>INFO: Acredita que não lembro? Mas deve ter tido ajuda do meu Staravia shiny.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/26.png" alt="Forest"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Cobble Badge</div><div class="dex-popup-desc">LÍDER: Maylene<br>INFO: Esse eu lembro que passei de primeira, você fez como?</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/27.png" alt="Cobble"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Fen Badge</div><div class="dex-popup-desc">LÍDER: Crasher Wake<br>INFO: O REI dos homens sem camisas, saudades Rolland, nossa foi chato esse, você lembro que passou fácil.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/28.png" alt="Fen"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Relic Badge</div><div class="dex-popup-desc">LÍDER: Fantina<br>INFO: Essa não lembro kkkkk.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/29.png" alt="Relic"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Mine Badge</div><div class="dex-popup-desc">LÍDER: Byron<br>INFO: Mamoswine eu lembro que foi bem, você foi como? Deve ter arrebentado com o Infernape.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/30.png" alt="Mine"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Icicle Badge</div><div class="dex-popup-desc">LÍDER: Candice<br>INFO: Fácil, Magmortar e Infernape fizeram a boa.</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/31.png" alt="Icicle"></div>
-                        <div class="slot"><div class="dex-popup"><div class="dex-popup-title">Beacon Badge</div><div class="dex-popup-desc">LÍDER: Volkner<br>INFO: Quase saimos de trisal, lembra? No final você arregou KKKKKK</div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/badges/32.png" alt="Beacon"></div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- ================= SEÇÃO DE MOMENTOS (14 SLOTS) ================= -->
-        <h2 class="section-divider">Nossos Momentos — 14 Screenshots</h2>
-
-        <div class="flash-card"><div class="photo-area"><img src="poke1.png" alt="Print 1" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Nossa primeira vez</h3><p>Primeiro print com momo, nunca tankei essa skin fofa de girafa roxa kkkk.</p></div></div>
-        <div class="flash-card"><div class="photo-area"><img src="poke2.png" alt="Print 2" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>MOMO, VAMOS MONTAR EM UM?</h3><p>MAMOSWINE,MAMOSWINE.</p></div></div>
-        <div class="flash-card"><div class="photo-area"><img src="poke3.png" alt="Print 3" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>MASQUERAIN!</h3><p>A maior lenda de todos os tempos e a Beautifly.</p></div></div>
-        <div class="flash-card"><div class="photo-area"><img src="poke4.png" alt="Print 4" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Carta fofa</h3><p>Cartinha fofa que momo me deu.</p></div></div>
-        <div class="flash-card"><div class="photo-area"><img src="poke5.png" alt="Print 5" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>GYM Jasmine</h3><p>O GYM mais fácil de Johto e o mais longe.</p></div></div>
-        <div class="flash-card"><div class="photo-area"><img src="poke6.png" alt="Print 6" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Úlitmo GYM de Johto</h3><p>Lembra que montamos uma estratégia com o Mega Ampharos e Agility?</p></div></div>
-        <div class="flash-card"><div class="photo-area"><img src="poke7.png" alt="Print 7" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>ALICE!!!</h3><p>O sequestro imPERFEITO de nossa filha.</p></div></div>
-        <div class="flash-card"><div class="photo-area"><img src="poke8.png" alt="Print 8" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>JOHTO CHAMPIONS!</h3><p>Chupa Lance, treinador do "tipo dragão".</p></div></div>
-        <div class="flash-card"><div class="photo-area"><img src="poke9.png" alt="Print 9" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>GYM FLANERY #09</h3><p>Chupa Flanery, amo o Ludicolo e o Flygon arrasou.</p></div></div>
-        <div class="flash-card"><div class="photo-area"><img src="poke10.png" alt="Print 10" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>Twunk do Wallace</h3><p>Você faria ele, né? Olha aí ele me comendo com os olhos.</p></div></div>
-        <div class="flash-card"><div class="photo-area"><img src="poke11.png" alt="Print 11" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>O melhor time</h3><p>Seu time em Hoenn e Steve puto com o Sharpedoo.</p></div></div>
-        <div class="flash-card"><div class="photo-area"><img src="poke12.png" alt="Print 12" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>HOENN CHAMPIONS!</h3><p>Steven querendo te comer, matei ele depois disso, lembra?</p></div></div>
-        <div class="flash-card"><div class="photo-area"><img src="poke13.png" alt="Print 13" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>GYM ROARK</h3><p>Lembra dessa Roserade que eu cismei que tinha usado e nada?</p></div></div>
-        <div class="flash-card"><div class="photo-area"><img src="poke14.png" alt="Print 14" class="screenshot"><div class="corner-ball">🔴</div></div><div class="text-area"><h3>SINNOH CHAMPIONS!!!</h3><p>Roubei dms essa desgraçada!!!</p></div></div>
-
-    </div>
-
-    <script>
-        function mudarPasta(evt, nomeRegiao) {
-            const conteudos = document.getElementsByClassName("badges-content");
-            for (let i = 0; i < conteudos.length; i++) {
-                conteudos[i].classList.remove("active-content");
-            }
-            const abas = document.getElementsByClassName("folder-tab");
-            for (let i = 0; i < abas.length; i++) {
-                abas[i].classList.remove("active-folder");
-            }
-            document.getElementById(nomeRegiao).classList.add("active-content");
-            evt.currentTarget.classList.add("active-folder");
-        }
-    </script>
-</body>
-</html>
+                    <div class="slot
