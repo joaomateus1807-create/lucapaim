@@ -186,6 +186,13 @@
                 </div>
 
                 <div class="status-item" style="grid-column: 1 / -1;">
+                    <div class="status-label">Próximo Evento (Tempo para nos vermos)</div>
+                    <div class="status-value timer-display" id="tempoProximoEncontro" style="color: #2980b9;">
+                        ⏳ 000 dias
+                    </div>
+                </div>
+
+                <div class="status-item" style="grid-column: 1 / -1;">
                     <div class="status-label">Meta Atual do Jogo</div>
                     <div class="status-value" style="color: #d35400;">
                         💍 Casar com momo em 7 anos
@@ -211,6 +218,7 @@
     <script>
         const conhecemosData = new Date(2024, 1, 2); // 02 de Fevereiro de 2024
         const namoroData = new Date(2025, 11, 4);   // 04 de Dezembro de 2025
+        const encontroData = new Date(2026, 6, 16);  // 16 de Julho de 2026 (Mês é baseado em 0, então Julho = 6)
 
         function obterDiferencaDetalhada(dataAlvo) {
             const agora = new Date();
@@ -245,15 +253,31 @@
             };
         }
 
+        function obterDiasRestantes(dataAlvo) {
+            const agora = new Date();
+            // Reseta as horas para calcular apenas dias inteiros sem bugs de fuso horário
+            const hojePuro = Date.UTC(agora.getFullYear(), agora.getMonth(), agora.getDate());
+            const alvoPuro = Date.UTC(dataAlvo.getFullYear(), dataAlvo.getMonth(), dataAlvo.getDate());
+            
+            const diferencaMilissegundos = alvoPuro - hojePuro;
+            const diasRestantes = Math.ceil(diferencaMilissegundos / (1000 * 60 * 60 * 24));
+            
+            return diasRestantes > 0 ? diasRestantes : 0;
+        }
+
         function atualizarPainel() {
             const c = obterDiferencaDetalhada(conhecemosData);
             const n = obterDiferencaDetalhada(namoroData);
+            const diasParaEncontro = obterDiasRestantes(encontroData);
 
             document.getElementById("tempoConhecemos").innerHTML = 
                 `✨ ${c.totais} dias (${c.anos} anos, ${c.meses} meses e ${c.dias} dias)`;
                 
             document.getElementById("tempoNamoro").innerHTML = 
                 `❤️ ${n.totais} dias (${n.anos} anos, ${n.meses} meses e ${n.dias} dias)`;
+
+            document.getElementById("tempoProximoEncontro").innerHTML = 
+                `⏳ ${diasParaEncontro} dias`;
         }
 
         atualizarPainel();
